@@ -1,0 +1,63 @@
+---
+import type { HistoryIndex } from '../lib/indicators';
+
+interface Props { history: HistoryIndex; }
+const { history } = Astro.props;
+const entries = [...history.entries].reverse();
+const width = 760;
+const height = 190;
+const padX = 42;
+const padY = 24;
+const xFor = (index: number) => entries.length <= 1 ? width / 2 : padX + index * ((width - padX * 2) / (entries.length - 1));
+const yFor = (score: number) => padY + ((12 - Math.max(-12, Math.min(12, score))) / 24) * (height - padY * 2);
+const points = entries.map((entry, index) => ({ ...entry, x: xFor(index), y: yFor(entry.signal.score) }));
+const path = points.map((point, index) => `${index ? 'L' : 'M'} ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
+---
+
+<section class="history-card card" aria-labelledby="history-title">
+  <div class="section-head">
+    <div><p>30-DAY SIGNAL</p><h2 id="history-title">訊號趨勢</h2></div>
+    <span>{entries.length} / 30 日</span>
+  </div>
+  {entries.length < 2 ? (
+    <div class="empty"><strong>資料累積中</strong><p>至少累積 2 個交易日後顯示趨勢線。</p></div>
+  ) : (
+    <div class="chart-wrap">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="近 30 日訊號分數趨勢，範圍負 12 至正 12">
+        <line x1={padX} x2={width - padX} y1={yFor(12)} y2={yFor(12)} class="grid" />
+        <line x1={padX} x2={width - padX} y1={yFor(0)} y2={yFor(0)} class="zero" />
+        <line x1={padX} x2={width - padX} y1={yFor(-12)} y2={yFor(-12)} class="grid" />
+        <text x="5" y={yFor(12) + 4}>+12</text><text x="18" y={yFor(0) + 4}>0</text><text x="7" y={yFor(-12) + 4}>-12</text>
+        <path d={path} class="trend" />
+        {points.map((point) => (
+          <circle cx={point.x} cy={point.y} r="5" class={`point ${point.signal.bias}`}>
+            <title>{point.date}：{point.signal.label}（{point.signal.score > 0 ? '+' : ''}{point.signal.score}），資料 {point.dataQuality.status}</title>
+          </circle>
+        ))}
+      </svg>
+      <div class="range"><span>{entries[0]?.date}</span><span>{entries.at(-1)?.date}</span></div>
+    </div>
+  )}
+</section>
+
+<style>
+  .card { overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
+  h2 { margin: 0; font-size: 1.15rem; }
+  .section-head > span { color: var(--muted); font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .chart-wrap { padding: .8rem 1rem .9rem; }
+  svg { display: block; width: 100%; height: auto; min-height: 190px; }
+  text { fill: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+  .grid { stroke: var(--line); stroke-dasharray: 3 5; }
+  .zero { stroke: color-mix(in srgb, var(--muted) 55%, transparent); }
+  .trend { fill: none; stroke: var(--text-2); stroke-width: 2; stroke-linejoin: round; }
+  .point { stroke: var(--surface); stroke-width: 2; }
+  .strongly_bullish, .bullish { fill: var(--red); }
+  .neutral { fill: var(--amber); }
+  .strongly_bearish, .bearish { fill: var(--green); }
+  .range { display: flex; justify-content: space-between; padding: 0 1.5rem; color: var(--muted); font-size: .66rem; font-variant-numeric: tabular-nums; }
+  .empty { display: grid; min-height: 220px; place-content: center; text-align: center; }
+  .empty strong { font-size: .95rem; }
+  .empty p { margin: .45rem 0 0; color: var(--muted); font-size: .75rem; }
+</style>

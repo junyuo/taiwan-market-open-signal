@@ -1,8 +1,36 @@
 {
-  "lastUpdated": "2026-06-24T01:20:21.502Z",
+  "lastUpdated": "2026-06-24T05:56:04.235Z",
+  "lastSuccessfulUpdate": "2026-06-24T05:56:04.235Z",
   "status": "ok",
-  "successCount": 15,
+  "successCount": 14,
   "failedCount": 0,
-  "staleCount": 0,
-  "errors": []
+  "staleCount": 1,
+  "fallbackCount": 1,
+  "coreSuccessRate": 0.8571428571428571,
+  "errors": [],
+  "warnings": [
+    "美國 10 年期殖利率: stale (137.6 小時)",
+    "美國 10 年期殖利率: 已保留 last-good 參考值",
+    "FRED: 未設定 FRED_API_KEY"
+  ],
+  "sources": [
+    {
+      "id": "yahoo",
+      "name": "Yahoo Finance",
+      "status": "ok",
+      "successCount": 15,
+      "failedCount": 0,
+      "lastCheckedAt": "2026-06-24T05:56:04.235Z",
+      "message": "15 項指標皆取得回應"
+    },
+    {
+      "id": "fred",
+      "name": "FRED DGS10",
+      "status": "not_configured",
+      "successCount": 0,
+      "failedCount": 0,
+      "lastCheckedAt": "2026-06-24T05:56:04.235Z",
+      "message": "未設定 FRED_API_KEY"
+    }
+  ]
 }

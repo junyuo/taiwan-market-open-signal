@@ -1,6 +1,6 @@
 # 台股開盤前全球訊號卡
 
-以 Astro 建立的純靜態市場儀表板。GitHub Actions 每天在台灣時間 07:30、08:30、08:55 抓取全球市場收盤資料，經過有限重試、驗證與規則評分後，更新靜態 JSON 並部署到 GitHub Pages。
+以 Astro 建立的純靜態市場儀表板。GitHub Actions 每天在台灣時間 07:30、08:30、08:55 抓取全球市場資料，經過有限重試、來源驗證、語意檢查與規則評分後，更新靜態 JSON 並部署到 GitHub Pages。
 
 > 本專案只在資料更新工作流程中存取外部資料；瀏覽器端不會直接呼叫 Yahoo Finance 或其他市場 API。
 
@@ -14,7 +14,9 @@
 | 商品 | WTI 原油 (`CL=F`)、黃金 (`GC=F`) |
 | 亞洲指數 | 日經 225 (`^N225`)、香港恆生 (`^HSI`) |
 
-第一版所有指標都經由 `scripts/utils/yahoo.ts` 封裝的 Yahoo Finance chart endpoint 取得。`fred.ts` 與 `twse.ts` 已保留為未來替換或交叉驗證資料源的介面。
+Yahoo Finance chart endpoint 是 15 項指標的主要資料源。若設定 `FRED_API_KEY`，流程會額外抓取 FRED `DGS10`，與 Yahoo TNX 水準進行交叉驗證；FRED 不會取代 Yahoo 的計分值。
+
+FRED 驗證規則：觀測值不得超過 3 日，且與 Yahoo 的差距不得超過 0.20 個百分點。超出門檻會標記 `mismatch` 並將資料品質降為 `degraded`；未設定 key 時顯示 `not_configured`，不會中斷更新。
 
 ## 評分邏輯
 
@@ -45,13 +47,22 @@
 1. 15 個指標平行抓取，單項錯誤互不影響。
 2. 每項資料最多重試 3 次（加上首次請求最多 4 次嘗試）。
 3. 重試間隔固定為 1、3、9 秒的 exponential backoff，不存在無窮迴圈。
-4. 超過 96 小時的市場時間戳標記為 `stale`。
-5. 產生資料後執行 schema 與計數一致性驗證。
-6. 以暫存檔加 rename 原子寫入：
+4. 新鮮度依市場類型判斷：美股 96 小時、FX／商品 24 小時、亞洲市場 48 小時；未來超過 15 分鐘的資料視為無效。
+5. failed／stale 指標保留最多 7 日的 `lastGood` 供參考，但不拿 last-good 值計分。
+6. 產生資料後檢查 schema、分數加總、訊號分級、品質計數、時間戳與來源狀態。
+7. 以暫存檔加 rename 原子寫入：
    - `public/data/latest.json`
    - `public/data/status.json`
    - `public/data/history/YYYY-MM-DD.json`
-7. 工作流程再執行驗證與 Astro build；通過後才 commit `public/data`。
+   - `public/data/history/index.json`（去重、倒序、最多 30 日）
+8. 工作流程再執行語意驗證、35+ 項單元測試與 Astro build；通過後才 commit `public/data`。
+
+資料狀態：
+
+- `ok`：本次取得且在新鮮度門檻內，可依規則計分。
+- `stale`：本次取得但已超過門檻，不計分。
+- `failed`：本次無法取得有效資料，不計分。
+- `lastGood`：failed／stale 列的上次可用參考值，畫面會明確標示，不冒充目前報價。
 
 ## 本機執行
 
@@ -69,8 +80,17 @@ npm run dev
 ```bash
 npm run fetch:data
 npm run validate:data
+npm test
 npm run build
 ```
+
+啟用 FRED 交叉驗證：
+
+```bash
+FRED_API_KEY=your_key npm run fetch:data
+```
+
+GitHub 上請到 **Settings → Secrets and variables → Actions** 新增 repository secret `FRED_API_KEY`。未設定時仍可正常使用 Yahoo 主流程。
 
 ## GitHub Actions 排程
 
@@ -82,7 +102,7 @@ npm run build
 
 若執行環境不支援 `timezone`，UTC 對應為前一日 23:30、當日 00:30、當日 00:55。GitHub 排程可能因平台負載而略有延遲。
 
-資料有變更時，workflow 使用 `chore(data): update market signal YYYY-MM-DD HH:mm` 格式 commit 回 `main`，並主動 dispatch Pages 部署。這是因為由 `GITHUB_TOKEN` push 的 commit 不會再次自動觸發另一個 workflow。
+資料有變更時，workflow 使用 `chore(data): update market signal YYYY-MM-DD HH:mm` 格式 commit 回 `main`，並主動 dispatch Pages 部署。結構有效的 `degraded`／`failed` 快照仍會部署；只有抓取程式崩潰、語意驗證、單元測試或 build 失敗才會阻止 commit。
 
 ## GitHub Pages 部署
 
@@ -112,3 +132,4 @@ src/pages/index.astro    # 靜態首頁
 - 指標只供市場觀察，不構成投資建議。
 - 台股開盤仍受突發新聞、外資下單、期貨盤與匯率影響，模型不能保證準確。
 - 本模型比較最近兩個可取得的日線收盤點，不等於即時盤前報價。
+- 30 日趨勢需逐日累積；不足 2 日時首頁會顯示「資料累積中」。

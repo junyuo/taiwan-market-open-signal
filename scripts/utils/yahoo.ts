@@ -1,6 +1,6 @@
 import { withRetry } from './retry';
 
-interface YahooChartResponse {
+export interface YahooChartResponse {
   chart?: {
     result?: Array<{
       timestamp?: number[];
@@ -18,6 +18,31 @@ export interface YahooQuote {
   timestamp: string;
 }
 
+export function parseYahooChart(payload: YahooChartResponse): YahooQuote {
+  if (payload.chart?.error) {
+    throw new Error(payload.chart.error.description ?? payload.chart.error.code ?? 'Yahoo API error');
+  }
+  const result = payload.chart?.result?.[0];
+  const timestamps = result?.timestamp ?? [];
+  const closes = result?.indicators?.quote?.[0]?.close ?? [];
+  const points = closes
+    .map((close, index) => ({ close, timestamp: timestamps[index] }))
+    .filter(
+      (point): point is { close: number; timestamp: number } =>
+        typeof point.close === 'number' && Number.isFinite(point.close) && typeof point.timestamp === 'number'
+    );
+  if (points.length < 2) throw new Error('Not enough completed price points');
+  const current = points.at(-1)!;
+  const previous = points.at(-2)!;
+  const change = current.close - previous.close;
+  return {
+    price: current.close,
+    change,
+    changePercent: (change / previous.close) * 100,
+    timestamp: new Date(current.timestamp * 1_000).toISOString()
+  };
+}
+
 export async function fetchYahooQuote(symbol: string): Promise<YahooQuote> {
   return withRetry(
     async () => {
@@ -29,31 +54,7 @@ export async function fetchYahooQuote(symbol: string): Promise<YahooQuote> {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const payload = (await response.json()) as YahooChartResponse;
-      if (payload.chart?.error) {
-        throw new Error(payload.chart.error.description ?? payload.chart.error.code ?? 'Yahoo API error');
-      }
-
-      const result = payload.chart?.result?.[0];
-      const timestamps = result?.timestamp ?? [];
-      const closes = result?.indicators?.quote?.[0]?.close ?? [];
-      const points = closes
-        .map((close, index) => ({ close, timestamp: timestamps[index] }))
-        .filter(
-          (point): point is { close: number; timestamp: number } =>
-            typeof point.close === 'number' && Number.isFinite(point.close) &&
-            typeof point.timestamp === 'number'
-        );
-
-      if (points.length < 2) throw new Error('Not enough completed price points');
-      const current = points.at(-1)!;
-      const previous = points.at(-2)!;
-      const change = current.close - previous.close;
-      return {
-        price: current.close,
-        change,
-        changePercent: (change / previous.close) * 100,
-        timestamp: new Date(current.timestamp * 1_000).toISOString()
-      };
+      return parseYahooChart(payload);
     },
     {
       retries: 3,

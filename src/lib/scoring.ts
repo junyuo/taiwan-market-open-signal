@@ -40,6 +40,20 @@ export function scoreIndicator(id: string, changePercent: number): number {
   }
 }
 
+export function explainIndicatorScore(id: string, changePercent: number, score: number): string {
+  const value = `${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(2)}%`;
+  switch (id) {
+    case 'nasdaq': return `Nasdaq ${value}，依區間規則計 ${score >= 0 ? '+' : ''}${score} 分`;
+    case 'sox': return `SOX ${value}，依半導體權重計 ${score >= 0 ? '+' : ''}${score} 分`;
+    case 'tsm': return Math.abs(changePercent) > 1 ? `TSM ADR ${value}，突破 ±1% 門檻` : `TSM ADR ${value}，未達 ±1% 門檻`;
+    case 'nvda': return Math.abs(changePercent) > 1.5 ? `NVIDIA ${value}，突破 ±1.5% 門檻` : `NVIDIA ${value}，未達 ±1.5% 門檻`;
+    case 'vix': return Math.abs(changePercent) > 5 ? `VIX ${value}，波動率變動超過 5%` : `VIX ${value}，未達 ±5% 門檻`;
+    case 'tnx': return Math.abs(changePercent) > 2 ? `美債殖利率 ${value}，變動超過 2%` : `美債殖利率 ${value}，未達 ±2% 門檻`;
+    case 'usdtwd': return Math.abs(changePercent) > 0.3 ? `USD/TWD ${value}，變動超過 0.3%` : `USD/TWD ${value}，未達 ±0.3% 門檻`;
+    default: return '背景觀察指標，不納入總分';
+  }
+}
+
 export function classifySignal(score: number): Pick<MarketSignal, 'label' | 'bias'> {
   if (score >= 6) return { label: '明顯偏多', bias: 'strongly_bullish' };
   if (score >= 2) return { label: '偏多', bias: 'bullish' };
@@ -67,5 +81,9 @@ export function buildSummary(indicators: MarketIndicator[], score: number): stri
 
 export function calculateSignal(indicators: MarketIndicator[]): MarketSignal {
   const score = indicators.reduce((total, indicator) => total + indicator.score, 0);
-  return { ...classifySignal(score), score, summary: buildSummary(indicators, score) };
+  const drivers = indicators
+    .filter((indicator) => indicator.isScored)
+    .map(({ id, name, score: contribution, scoreReason }) => ({ id, name, score: contribution, reason: scoreReason }))
+    .sort((a, b) => Math.abs(b.score) - Math.abs(a.score) || a.name.localeCompare(b.name));
+  return { ...classifySignal(score), score, summary: buildSummary(indicators, score), drivers };
 }

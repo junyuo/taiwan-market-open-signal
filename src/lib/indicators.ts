@@ -7,6 +7,8 @@ export type IndicatorCategory =
   | 'ASIA_INDEX';
 
 export type IndicatorStatus = 'ok' | 'stale' | 'failed';
+export type VerificationStatus = 'matched' | 'mismatch' | 'unavailable' | 'not_configured';
+export type SourceStatus = 'ok' | 'degraded' | 'failed' | 'not_configured';
 
 export interface IndicatorDefinition {
   id: string;
@@ -14,6 +16,25 @@ export interface IndicatorDefinition {
   symbol: string;
   category: IndicatorCategory;
   core: boolean;
+  maxAgeHours: number;
+}
+
+export interface LastGoodValue {
+  price: number;
+  change: number;
+  changePercent: number;
+  timestamp: string;
+  generatedAt: string;
+}
+
+export interface IndicatorVerification {
+  source: 'FRED';
+  seriesId: 'DGS10';
+  status: VerificationStatus;
+  value: number | null;
+  timestamp: string | null;
+  difference: number | null;
+  message: string;
 }
 
 export interface MarketIndicator extends IndicatorDefinition {
@@ -25,6 +46,18 @@ export interface MarketIndicator extends IndicatorDefinition {
   source: string;
   timestamp: string | null;
   error?: string;
+  isScored: boolean;
+  scoreReason: string;
+  ageHours: number | null;
+  lastGood?: LastGoodValue;
+  verification?: IndicatorVerification;
+}
+
+export interface SignalDriver {
+  id: string;
+  name: string;
+  score: number;
+  reason: string;
 }
 
 export interface MarketSignal {
@@ -37,6 +70,7 @@ export interface MarketSignal {
     | 'neutral'
     | 'bearish'
     | 'strongly_bearish';
+  drivers: SignalDriver[];
 }
 
 export interface DataQuality {
@@ -44,6 +78,18 @@ export interface DataQuality {
   successCount: number;
   failedCount: number;
   staleCount: number;
+  fallbackCount: number;
+  coreSuccessRate: number;
+}
+
+export interface SourceHealth {
+  id: 'yahoo' | 'fred';
+  name: string;
+  status: SourceStatus;
+  successCount: number;
+  failedCount: number;
+  lastCheckedAt: string;
+  message: string;
 }
 
 export interface MarketSnapshot {
@@ -53,29 +99,45 @@ export interface MarketSnapshot {
   signal: MarketSignal;
   indicators: MarketIndicator[];
   dataQuality: DataQuality;
+  sources: SourceHealth[];
 }
 
 export interface DataStatus extends DataQuality {
   lastUpdated: string;
+  lastSuccessfulUpdate: string | null;
   errors: string[];
+  warnings: string[];
+  sources: SourceHealth[];
+}
+
+export interface HistorySummary {
+  date: string;
+  generatedAt: string;
+  signal: Pick<MarketSignal, 'label' | 'score' | 'bias'>;
+  dataQuality: DataQuality;
+}
+
+export interface HistoryIndex {
+  generatedAt: string;
+  entries: HistorySummary[];
 }
 
 export const INDICATORS: IndicatorDefinition[] = [
-  { id: 'sp500', name: 'S&P 500', symbol: '^GSPC', category: 'US_INDEX', core: false },
-  { id: 'nasdaq', name: 'Nasdaq', symbol: '^IXIC', category: 'US_INDEX', core: true },
-  { id: 'dow', name: 'Dow Jones', symbol: '^DJI', category: 'US_INDEX', core: false },
-  { id: 'sox', name: 'SOX 費半', symbol: '^SOX', category: 'SEMICONDUCTOR', core: true },
-  { id: 'tsm', name: 'TSM ADR', symbol: 'TSM', category: 'SEMICONDUCTOR', core: true },
-  { id: 'nvda', name: 'NVIDIA', symbol: 'NVDA', category: 'SEMICONDUCTOR', core: true },
-  { id: 'amd', name: 'AMD', symbol: 'AMD', category: 'SEMICONDUCTOR', core: false },
-  { id: 'asml', name: 'ASML', symbol: 'ASML', category: 'SEMICONDUCTOR', core: false },
-  { id: 'vix', name: 'VIX', symbol: '^VIX', category: 'VOLATILITY', core: true },
-  { id: 'tnx', name: '美國 10 年期殖利率', symbol: '^TNX', category: 'RATE_FX', core: true },
-  { id: 'usdtwd', name: 'USD/TWD', symbol: 'TWD=X', category: 'RATE_FX', core: true },
-  { id: 'wti', name: 'WTI 原油', symbol: 'CL=F', category: 'COMMODITY', core: false },
-  { id: 'gold', name: '黃金', symbol: 'GC=F', category: 'COMMODITY', core: false },
-  { id: 'nikkei', name: '日經 225', symbol: '^N225', category: 'ASIA_INDEX', core: false },
-  { id: 'hsi', name: '香港恆生', symbol: '^HSI', category: 'ASIA_INDEX', core: false }
+  { id: 'sp500', name: 'S&P 500', symbol: '^GSPC', category: 'US_INDEX', core: false, maxAgeHours: 96 },
+  { id: 'nasdaq', name: 'Nasdaq', symbol: '^IXIC', category: 'US_INDEX', core: true, maxAgeHours: 96 },
+  { id: 'dow', name: 'Dow Jones', symbol: '^DJI', category: 'US_INDEX', core: false, maxAgeHours: 96 },
+  { id: 'sox', name: 'SOX 費半', symbol: '^SOX', category: 'SEMICONDUCTOR', core: true, maxAgeHours: 96 },
+  { id: 'tsm', name: 'TSM ADR', symbol: 'TSM', category: 'SEMICONDUCTOR', core: true, maxAgeHours: 96 },
+  { id: 'nvda', name: 'NVIDIA', symbol: 'NVDA', category: 'SEMICONDUCTOR', core: true, maxAgeHours: 96 },
+  { id: 'amd', name: 'AMD', symbol: 'AMD', category: 'SEMICONDUCTOR', core: false, maxAgeHours: 96 },
+  { id: 'asml', name: 'ASML', symbol: 'ASML', category: 'SEMICONDUCTOR', core: false, maxAgeHours: 96 },
+  { id: 'vix', name: 'VIX', symbol: '^VIX', category: 'VOLATILITY', core: true, maxAgeHours: 96 },
+  { id: 'tnx', name: '美國 10 年期殖利率', symbol: '^TNX', category: 'RATE_FX', core: true, maxAgeHours: 96 },
+  { id: 'usdtwd', name: 'USD/TWD', symbol: 'TWD=X', category: 'RATE_FX', core: true, maxAgeHours: 24 },
+  { id: 'wti', name: 'WTI 原油', symbol: 'CL=F', category: 'COMMODITY', core: false, maxAgeHours: 24 },
+  { id: 'gold', name: '黃金', symbol: 'GC=F', category: 'COMMODITY', core: false, maxAgeHours: 24 },
+  { id: 'nikkei', name: '日經 225', symbol: '^N225', category: 'ASIA_INDEX', core: false, maxAgeHours: 48 },
+  { id: 'hsi', name: '香港恆生', symbol: '^HSI', category: 'ASIA_INDEX', core: false, maxAgeHours: 48 }
 ];
 
 export const CATEGORY_LABELS: Record<IndicatorCategory, string> = {

@@ -1,0 +1,54 @@
+---
+import type { DataStatus, SourceHealth } from '../lib/indicators';
+import { formatDateTime } from '../lib/format';
+
+interface Props {
+  sources: SourceHealth[];
+  status: DataStatus;
+}
+const { sources, status } = Astro.props;
+const labels = { ok: '正常', degraded: '需留意', failed: '失敗', not_configured: '未設定' };
+---
+
+<section class="health-card card" aria-labelledby="source-health-title">
+  <div class="section-head"><div><p>DATA PROVENANCE</p><h2 id="source-health-title">來源健康</h2></div></div>
+  <div class="sources">
+    {sources.map((source) => (
+      <article>
+        <div><strong>{source.name}</strong><span class:list={['source-status', source.status]}>{labels[source.status]}</span></div>
+        <p>{source.message}</p>
+        <small>{source.successCount} 成功 · {source.failedCount} 失敗</small>
+      </article>
+    ))}
+  </div>
+  <div class="last-success">
+    <span>最後完整成功</span>
+    <strong>{status.lastSuccessfulUpdate ? `${formatDateTime(status.lastSuccessfulUpdate)}（台北）` : '尚無紀錄'}</strong>
+  </div>
+  {status.warnings?.length > 0 && <details><summary>檢視 {status.warnings.length} 項提醒</summary><ul>{status.warnings.map((warning) => <li>{warning}</li>)}</ul></details>}
+</section>
+
+<style>
+  .card { overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
+  h2 { margin: 0; font-size: 1.15rem; }
+  .sources { display: grid; grid-template-columns: repeat(2, 1fr); }
+  article { padding: 1rem 1.2rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  article:last-child { border-right: 0; }
+  article > div { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+  article strong { font-size: .84rem; }
+  .source-status { padding: .2rem .42rem; border-radius: .3rem; font-size: .66rem; font-weight: 800; white-space: nowrap; }
+  .ok { color: var(--green); background: color-mix(in srgb, var(--green) 10%, transparent); }
+  .degraded, .not_configured { color: var(--amber); background: color-mix(in srgb, var(--amber) 10%, transparent); }
+  .failed { color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); }
+  article p { min-height: 2.4em; margin: .6rem 0 .4rem; color: var(--text-2); font-size: .75rem; line-height: 1.5; }
+  small { color: var(--muted); font-size: .68rem; }
+  .last-success { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 1.2rem; }
+  .last-success span { color: var(--muted); font-size: .72rem; }
+  .last-success strong { font-size: .75rem; font-variant-numeric: tabular-nums; text-align: right; }
+  details { border-top: 1px solid var(--line); padding: .8rem 1.2rem; }
+  summary { color: var(--amber); cursor: pointer; font-size: .72rem; }
+  ul { margin: .65rem 0 0; padding-left: 1.1rem; color: var(--text-2); font-size: .7rem; line-height: 1.6; }
+  @media (max-width: 520px) { .sources { grid-template-columns: 1fr; } article { border-right: 0; } }
+</style>

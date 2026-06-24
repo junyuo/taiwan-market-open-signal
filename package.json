@@ -7,8 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "fetch:data": "tsx scripts/fetch-market-data.ts",
-    "validate:data": "tsx scripts/validate-data.ts"
+    "fetch:data": "node --import tsx scripts/fetch-market-data.ts",
+    "validate:data": "node --import tsx scripts/validate-data.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "astro": "^7.0.2"
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@types/node": "^24.0.3",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.9"
   }
 }

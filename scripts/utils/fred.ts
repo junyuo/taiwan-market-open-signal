@@ -5,6 +5,17 @@ export interface FredObservation {
   value: number;
 }
 
+export interface FredValue {
+  value: number;
+  timestamp: string;
+}
+
+export function latestFredValue(observations: FredObservation[]): FredValue {
+  const latest = [...observations].sort((a, b) => b.date.localeCompare(a.date))[0];
+  if (!latest) throw new Error('FRED 沒有有效觀測值');
+  return { value: latest.value, timestamp: new Date(`${latest.date}T00:00:00.000Z`).toISOString() };
+}
+
 export async function fetchFredSeries(seriesId: string, apiKey: string): Promise<FredObservation[]> {
   return withRetry(async () => {
     const url = new URL('https://api.stlouisfed.org/fred/series/observations');
