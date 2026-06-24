@@ -1,0 +1,15 @@
+---
+interface Props { summary: string; }
+const { summary } = Astro.props;
+---
+
+<div class="narrative">
+  <span aria-hidden="true">觀察</span>
+  <p>{summary}</p>
+</div>
+
+<style>
+  .narrative { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: .8rem; margin-top: 1.4rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  span { padding: .25rem .45rem; border-radius: .3rem; background: var(--surface-3); color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .08em; }
+  p { margin: 0; color: var(--text-2); font-size: .98rem; line-height: 1.7; }
+</style>

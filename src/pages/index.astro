@@ -1,0 +1,102 @@
+---
+import latest from '../../public/data/latest.json';
+import DataQualityBadge from '../components/DataQualityBadge.astro';
+import IndicatorTable from '../components/IndicatorTable.astro';
+import SignalCard from '../components/SignalCard.astro';
+import { formatDateTime } from '../lib/format';
+import type { MarketSnapshot } from '../lib/indicators';
+
+const data = latest as MarketSnapshot;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="整合美股、半導體、波動率、利率與匯率的台股開盤前全球訊號卡。" />
+    <title>台股開盤前全球訊號卡</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="brand">
+          <span class="mark" aria-hidden="true">TW</span>
+          <div>
+            <p>MARKET OPEN INTELLIGENCE</p>
+            <h1>台股開盤前全球訊號卡</h1>
+          </div>
+        </div>
+        <div class="meta">
+          <div><span>更新時間</span><time datetime={data.generatedAt}>{formatDateTime(data.generatedAt)}（台北）</time></div>
+          <DataQualityBadge quality={data.dataQuality} />
+        </div>
+      </header>
+
+      <SignalCard signal={data.signal} />
+
+      <div class="quality-grid" aria-label="資料品質統計">
+        <div><span>正常資料</span><strong>{data.dataQuality.successCount}</strong></div>
+        <div><span>失敗資料</span><strong>{data.dataQuality.failedCount}</strong></div>
+        <div><span>過期資料</span><strong>{data.dataQuality.staleCount}</strong></div>
+        <div><span>市場日期</span><strong class="date">{data.date}</strong></div>
+      </div>
+
+      <IndicatorTable indicators={data.indicators} />
+
+      <footer>
+        <p>資料來源：Yahoo Finance chart endpoint。資料可能延遲或中斷。</p>
+        <p>本頁僅供市場觀察，不構成任何投資建議。</p>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: dark;
+    --bg: #08100f;
+    --surface: #0d1816;
+    --surface-2: #101d1a;
+    --surface-3: #152522;
+    --line: #203430;
+    --text: #edf5f2;
+    --text-2: #bdcbc7;
+    --muted: #748b85;
+    --red: #ff6b6b;
+    --green: #4ed6a0;
+    --amber: #f5bd57;
+    --shadow: 0 18px 50px rgba(0, 0, 0, .18);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-width: 320px; background: radial-gradient(circle at 85% -10%, rgba(39, 117, 94, .18), transparent 30rem), var(--bg); }
+  main { width: min(1240px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 3rem; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 1.5rem; padding: .5rem 0; }
+  .brand { display: flex; align-items: center; gap: .9rem; }
+  .mark { display: grid; width: 2.7rem; height: 2.7rem; place-items: center; border: 1px solid #2d5f52; border-radius: .65rem; background: #10241f; color: var(--green); font-size: .72rem; font-weight: 900; letter-spacing: .08em; }
+  .brand p { margin: 0 0 .3rem; color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .15em; }
+  h1 { margin: 0; font-size: clamp(1.3rem, 4vw, 1.85rem); letter-spacing: -.03em; }
+  .meta { display: flex; align-items: center; gap: 1rem; }
+  .meta > div { text-align: right; }
+  .meta span, .meta time { display: block; }
+  .meta div > span { margin-bottom: .2rem; color: var(--muted); font-size: .68rem; }
+  .meta time { color: var(--text-2); font-size: .78rem; font-variant-numeric: tabular-nums; }
+  .quality-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 1.25rem; overflow: hidden; border: 1px solid var(--line); border-radius: .8rem; background: var(--line); }
+  .quality-grid > div { display: flex; align-items: baseline; justify-content: space-between; padding: .9rem 1rem; background: var(--surface); }
+  .quality-grid span { color: var(--muted); font-size: .72rem; }
+  .quality-grid strong { font-size: 1rem; font-variant-numeric: tabular-nums; }
+  .quality-grid .date { font-size: .82rem; }
+  footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding: 1rem .15rem; color: var(--muted); font-size: .72rem; }
+  footer p { margin: 0; }
+  @media (max-width: 760px) {
+    main { width: min(100% - 1.1rem, 1240px); padding-top: 1rem; }
+    header { align-items: flex-start; }
+    .brand p { display: none; }
+    .meta { flex-direction: column; align-items: flex-end; gap: .55rem; }
+    .quality-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; }
+  }
+</style>

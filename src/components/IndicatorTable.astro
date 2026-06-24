@@ -1,0 +1,71 @@
+---
+import type { MarketIndicator } from '../lib/indicators';
+import { CATEGORY_LABELS } from '../lib/indicators';
+import { formatDateTime, formatNumber, formatPercent, formatSigned } from '../lib/format';
+
+interface Props { indicators: MarketIndicator[]; }
+const { indicators } = Astro.props;
+const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
+---
+
+<section class="table-card" aria-labelledby="indicator-title">
+  <div class="section-head">
+    <div>
+      <p>GLOBAL INDICATORS</p>
+      <h2 id="indicator-title">全球市場指標</h2>
+    </div>
+    <span>共 {indicators.length} 項</span>
+  </div>
+  <div class="table-scroll" tabindex="0" aria-label="全球市場指標，可橫向捲動">
+    <table>
+      <thead>
+        <tr>
+          <th>分類</th><th>指標</th><th class="num">最新值</th><th class="num">漲跌</th><th class="num">漲跌幅</th><th class="num">分數</th><th>狀態</th><th>來源</th><th>時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        {indicators.map((item) => (
+          <tr class:list={[item.status !== 'ok' && 'muted-row']}>
+            <td><span class="category">{CATEGORY_LABELS[item.category]}</span></td>
+            <td class="name"><strong>{item.name}</strong><small>{item.symbol}</small></td>
+            <td class="num">{formatNumber(item.price)}</td>
+            <td class:list={['num', item.change !== null && (item.change > 0 ? 'up' : item.change < 0 ? 'down' : '')]}>{formatSigned(item.change)}</td>
+            <td class:list={['num', item.changePercent !== null && (item.changePercent > 0 ? 'up' : item.changePercent < 0 ? 'down' : '')]}>{formatPercent(item.changePercent)}</td>
+            <td class:list={['num', item.score > 0 ? 'up' : item.score < 0 ? 'down' : '']}><strong>{item.score > 0 ? `+${item.score}` : item.score}</strong></td>
+            <td><span class:list={['status', item.status]}>{statusLabels[item.status]}</span></td>
+            <td class="source">{item.source}</td>
+            <td class="time">{formatDateTime(item.timestamp)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .table-card { margin-top: 1.25rem; overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
+  .section-head h2 { margin: 0; font-size: 1.15rem; }
+  .section-head > span { color: var(--muted); font-size: .78rem; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; min-width: 1050px; border-collapse: collapse; }
+  th, td { padding: .78rem .9rem; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+  th { color: var(--muted); background: var(--surface-2); font-size: .7rem; font-weight: 700; }
+  td { color: var(--text-2); font-size: .8rem; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: color-mix(in srgb, var(--surface-3) 55%, transparent); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .name strong { display: block; color: var(--text); }
+  .name small { display: block; margin-top: .15rem; color: var(--muted); font-size: .68rem; }
+  .category { color: var(--text-2); font-size: .72rem; }
+  .status { display: inline-flex; min-width: 2.8rem; justify-content: center; padding: .22rem .42rem; border-radius: .3rem; font-size: .68rem; font-weight: 800; }
+  .status.ok { color: var(--green); background: color-mix(in srgb, var(--green) 10%, transparent); }
+  .status.stale { color: var(--amber); background: color-mix(in srgb, var(--amber) 10%, transparent); }
+  .status.failed { color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); }
+  .up { color: var(--red); }
+  .down { color: var(--green); }
+  .muted-row td { opacity: .72; }
+  .source, .time { color: var(--muted); }
+  @media (max-width: 720px) { .section-head { padding: 1.1rem; } th, td { padding: .72rem; } }
+</style>

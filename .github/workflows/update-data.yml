@@ -1,0 +1,71 @@
+name: Update market data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 7 * * *'
+      timezone: Asia/Taipei
+    - cron: '30 8 * * *'
+      timezone: Asia/Taipei
+    - cron: '55 8 * * *'
+      timezone: Asia/Taipei
+    # UTC equivalents (if timezone-aware schedules are unavailable):
+    # 07:30 = 23:30 UTC on the previous day; 08:30 = 00:30 UTC; 08:55 = 00:55 UTC.
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: update-market-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch market data
+        run: npm run fetch:data
+
+      - name: Validate generated data
+        run: npm run validate:data
+
+      - name: Verify site build
+        run: npm run build
+
+      - name: Commit data changes
+        id: commit
+        env:
+          TZ: Asia/Taipei
+        run: |
+          if git diff --quiet -- public/data; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No public/data changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data
+          git commit -m "chore(data): update market signal $(date '+%Y-%m-%d %H:%M')"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Commits pushed by GITHUB_TOKEN do not trigger another workflow automatically.
+      - name: Deploy refreshed site
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

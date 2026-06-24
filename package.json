@@ -1,0 +1,21 @@
+{
+  "name": "taiwan-market-open-signal",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch:data": "tsx scripts/fetch-market-data.ts",
+    "validate:data": "tsx scripts/validate-data.ts"
+  },
+  "dependencies": {
+    "astro": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  }
+}
