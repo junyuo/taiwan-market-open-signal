@@ -42,23 +42,23 @@ const rate = (value: number | null) => value === null ? '—' : `${(value * 100)
 <style>
   .evaluation-card { margin-top: 1rem; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow); }
   .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
-  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
-  h2 { margin: 0; font-size: 1.15rem; }
-  .section-head > span { color: var(--muted); font-size: .72rem; }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .14em; }
+  h2 { margin: 0; font-size: 1.25rem; }
+  .section-head > span { color: var(--muted); font-size: var(--font-sm); }
   .collecting { padding: 1.05rem var(--space-card); }
   .progress-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .progress-copy strong { font-size: .92rem; font-variant-numeric: tabular-nums; }
-  .progress-copy span, .collecting small { color: var(--muted); font-size: .72rem; }
+  .progress-copy span, .collecting small { color: var(--muted); font-size: var(--font-body); }
   .track { height: .42rem; margin: .85rem 0 .6rem; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); border-radius: 999px; background: var(--surface-3); box-shadow: inset 0 1px 3px rgba(0,0,0,.28); }
   .track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, color-mix(in srgb, var(--green) 65%, var(--blue)), var(--green)); box-shadow: 0 0 14px color-mix(in srgb, var(--green) 28%, transparent); }
   .metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
   .metrics > div { display: grid; gap: .35rem; padding: 1.05rem var(--space-card); border-right: 1px solid var(--line); background: linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 35%, transparent), transparent); }
   .metrics > div:last-child { border-right: 0; }
-  .metrics span, .metrics small { color: var(--muted); font-size: .7rem; }
+  .metrics span, .metrics small { color: var(--muted); font-size: var(--font-sm); }
   .metrics strong { font-size: 1.45rem; font-variant-numeric: tabular-nums; }
-  .period { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
+  .period { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: var(--font-sm); }
   .period strong { color: var(--text-2); font-variant-numeric: tabular-nums; }
-  .note { margin: 0; padding: .72rem var(--space-card); border-top: 1px solid var(--line); color: var(--muted); background: color-mix(in srgb, var(--surface-2) 28%, transparent); font-size: .67rem; line-height: 1.55; }
+  .note { margin: 0; padding: .72rem var(--space-card); border-top: 1px solid var(--line); color: var(--muted); background: color-mix(in srgb, var(--surface-2) 28%, transparent); font-size: var(--font-xs); line-height: 1.55; }
   @media (max-width: 620px) {
     .section-head, .progress-copy, .period { align-items: flex-start; flex-direction: column; gap: .45rem; }
     .section-head { align-items: flex-start; }

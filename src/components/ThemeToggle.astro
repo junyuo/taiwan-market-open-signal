@@ -1,0 +1,52 @@
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="切換為淺色主題" aria-pressed="false" title="切換為淺色主題">
+  <svg class="icon sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+  <svg class="icon moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.4A8.5 8.5 0 0 1 8.6 4a8.5 8.5 0 1 0 11.4 11.4Z"></path></svg>
+  <span class="theme-label">淺色</span>
+</button>
+
+<script is:inline>
+  (() => {
+    const button = document.getElementById('theme-toggle');
+    if (!(button instanceof HTMLButtonElement)) return;
+    const root = document.documentElement;
+    const label = button.querySelector('.theme-label');
+    const storageKey = 'tw-market-theme';
+
+    const sync = () => {
+      const isLight = root.dataset.theme === 'light';
+      const nextLabel = isLight ? '切換為深色主題' : '切換為淺色主題';
+      button.setAttribute('aria-pressed', String(isLight));
+      button.setAttribute('aria-label', nextLabel);
+      button.title = nextLabel;
+      if (label) label.textContent = isLight ? '深色' : '淺色';
+    };
+
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      root.dataset.themeSource = 'stored';
+      try { localStorage.setItem(storageKey, next); } catch { /* Theme still applies for this page. */ }
+      sync();
+    });
+
+    const preference = window.matchMedia('(prefers-color-scheme: light)');
+    const onPreferenceChange = (event) => {
+      if (root.dataset.themeSource !== 'system') return;
+      root.dataset.theme = event.matches ? 'light' : 'dark';
+      sync();
+    };
+    if (preference.addEventListener) preference.addEventListener('change', onPreferenceChange);
+    else preference.addListener?.(onPreferenceChange);
+    sync();
+  })();
+</script>
+
+<style>
+  .theme-toggle { display: inline-flex; align-items: center; gap: .42rem; min-height: 2.15rem; padding: .38rem .62rem; border: 1px solid var(--line); border-radius: 999px; color: var(--text-2); background: var(--surface-2); box-shadow: var(--shadow-control); cursor: pointer; font: inherit; font-size: var(--font-xs); font-weight: 750; transition: border-color .18s ease, background-color .18s ease, color .18s ease; }
+  .theme-toggle:hover { border-color: var(--line-strong); color: var(--text); background: var(--surface-3); }
+  .icon { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+  .moon { display: none; }
+  :global(html[data-theme='light']) .sun { display: none; }
+  :global(html[data-theme='light']) .moon { display: block; }
+  @media (max-width: 420px) { .theme-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .theme-toggle { width: 2.15rem; justify-content: center; padding-inline: .45rem; } }
+</style>

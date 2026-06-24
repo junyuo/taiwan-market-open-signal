@@ -43,12 +43,12 @@ const path = points.map((point, index) => `${index ? 'L' : 'M'} ${point.x.toFixe
 <style>
   .card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow); }
   .section-head { display: flex; align-items: end; justify-content: space-between; padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
-  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
-  h2 { margin: 0; font-size: 1.15rem; }
-  .section-head > span { color: var(--muted); font-size: .75rem; font-variant-numeric: tabular-nums; }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .14em; }
+  h2 { margin: 0; font-size: 1.25rem; }
+  .section-head > span { color: var(--muted); font-size: var(--font-sm); font-variant-numeric: tabular-nums; }
   .chart-wrap { padding: .8rem 1rem .9rem; }
   svg { display: block; width: 100%; height: auto; min-height: 190px; }
-  text { fill: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+  text { fill: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
   .grid { stroke: var(--line); stroke-dasharray: 3 5; }
   .zero { stroke: color-mix(in srgb, var(--muted) 55%, transparent); }
   .trend { fill: none; stroke: var(--text-2); stroke-width: 2.25; stroke-linejoin: round; filter: drop-shadow(0 0 5px rgba(195,209,204,.18)); }
@@ -56,9 +56,9 @@ const path = points.map((point, index) => `${index ? 'L' : 'M'} ${point.x.toFixe
   .strongly_bullish, .bullish { fill: var(--red); }
   .neutral { fill: var(--amber); }
   .strongly_bearish, .bearish { fill: var(--green); }
-  .range { display: flex; justify-content: space-between; padding: 0 1.5rem; color: var(--muted); font-size: .66rem; font-variant-numeric: tabular-nums; }
+  .range { display: flex; justify-content: space-between; padding: 0 1.5rem; color: var(--muted); font-size: var(--font-xs); font-variant-numeric: tabular-nums; }
   .empty { display: grid; min-height: 172px; place-content: center; padding: 1rem; text-align: center; background: radial-gradient(circle at 50% 46%, rgba(75,217,162,.045), transparent 9rem); }
   .empty strong { font-size: .95rem; }
-  .empty p { margin: .4rem 0 0; color: var(--muted); font-size: .72rem; }
+  .empty p { margin: .4rem 0 0; color: var(--muted); font-size: var(--font-sm); }
   @media (max-width: 760px) { .empty { min-height: 132px; } }
 </style>

@@ -10,7 +10,7 @@ const { summary } = Astro.props;
 
 <style>
   .narrative { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: .75rem; margin-top: 1.15rem; padding-top: 1rem; border-top: 1px solid color-mix(in srgb, var(--line) 78%, transparent); }
-  span { padding: .23rem .42rem; border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--surface-3) 78%, transparent); color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .08em; }
-  p { margin: 0; color: var(--text-2); font-size: clamp(.86rem, 2vw, .96rem); line-height: 1.65; }
+  span { padding: .23rem .42rem; border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--surface-3) 78%, transparent); color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .08em; }
+  p { margin: 0; color: var(--text-2); font-size: clamp(var(--font-body), 2vw, 1rem); line-height: 1.65; }
   @media (max-width: 520px) { .narrative { gap: .6rem; } p { line-height: 1.58; } }
 </style>

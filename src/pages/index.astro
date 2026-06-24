@@ -10,6 +10,7 @@ import SignalBreakdown from '../components/SignalBreakdown.astro';
 import SignalCard from '../components/SignalCard.astro';
 import SignalHistory from '../components/SignalHistory.astro';
 import SourceHealthPanel from '../components/SourceHealthPanel.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { formatDateTime } from '../lib/format';
 import type { DataStatus, EvaluationSummary, HistoryIndex, MarketSnapshot } from '../lib/indicators';
 
@@ -20,11 +21,21 @@ const evaluation = evaluationData as EvaluationSummary;
 ---
 
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" data-theme="dark" data-theme-source="system">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="整合美股、半導體、波動率、利率與匯率的台股開盤前全球訊號卡。" />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        let stored = null;
+        try { stored = localStorage.getItem('tw-market-theme'); } catch { /* Use system preference. */ }
+        const valid = stored === 'dark' || stored === 'light';
+        root.dataset.theme = valid ? stored : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        root.dataset.themeSource = valid ? 'stored' : 'system';
+      })();
+    </script>
     <title>台股開盤前全球訊號卡</title>
   </head>
   <body>
@@ -38,8 +49,8 @@ const evaluation = evaluationData as EvaluationSummary;
           </div>
         </div>
         <div class="meta">
-          <div><span>更新時間</span><time datetime={data.generatedAt}>{formatDateTime(data.generatedAt)}（台北）</time></div>
-          <DataQualityBadge quality={data.dataQuality} />
+          <div class="update-meta"><span>更新時間</span><time datetime={data.generatedAt}>{formatDateTime(data.generatedAt)}（台北）</time></div>
+          <div class="meta-actions"><ThemeToggle /><DataQualityBadge quality={data.dataQuality} /></div>
         </div>
       </header>
 
@@ -74,51 +85,87 @@ const evaluation = evaluationData as EvaluationSummary;
 </html>
 
 <style is:global>
-  :root {
+  :root, :root[data-theme='dark'] {
     color-scheme: dark;
-    --bg: #07100e;
-    --bg-elevated: #091411;
-    --surface: #0c1815;
-    --surface-2: #101e1a;
-    --surface-3: #162621;
-    --surface-hover: #13231f;
-    --line: #223a33;
-    --line-strong: #315047;
-    --text: #f0f7f4;
-    --text-2: #c3d1cc;
-    --muted: #81968f;
-    --red: #ff7373;
-    --green: #4bd9a2;
-    --amber: #f5bf61;
-    --blue: #69b7ff;
+    --bg: #101917;
+    --bg-elevated: #131f1c;
+    --surface: #17231f;
+    --surface-2: #1d2c27;
+    --surface-3: #253630;
+    --surface-hover: #2a3d36;
+    --line: #3b5149;
+    --line-strong: #567068;
+    --text: #f6faf8;
+    --text-2: #d4dfdb;
+    --muted: #a5b5af;
+    --red: #ff7b7b;
+    --green: #55dda9;
+    --amber: #ffc76d;
+    --blue: #78bfff;
+    --ambient-1: rgba(66, 164, 131, .16);
+    --ambient-2: rgba(65, 118, 101, .1);
+    --grid-line: rgba(255, 255, 255, .018);
+    --mark-start: #244039;
+    --mark-end: #182a25;
+    --shadow-control: 0 8px 24px rgba(0,0,0,.12);
+    --shadow: 0 18px 52px rgba(0, 0, 0, .2), 0 1px 0 rgba(255, 255, 255, .025) inset;
+    --shadow-hero: 0 24px 70px rgba(0, 0, 0, .24), 0 1px 0 rgba(255, 255, 255, .035) inset;
+    --font-xs: .75rem;
+    --font-sm: .8125rem;
+    --font-body: .875rem;
     --radius-sm: .48rem;
     --radius-md: .78rem;
     --radius-lg: 1.05rem;
     --space-card: clamp(1rem, 2vw, 1.4rem);
-    --shadow: 0 18px 52px rgba(0, 0, 0, .22), 0 1px 0 rgba(255, 255, 255, .018) inset;
-    --shadow-hero: 0 24px 70px rgba(0, 0, 0, .28), 0 1px 0 rgba(255, 255, 255, .025) inset;
     font-family: Inter, "Noto Sans TC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text);
   }
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --bg: #edf2f0;
+    --bg-elevated: #f6f8f7;
+    --surface: #ffffff;
+    --surface-2: #f4f7f6;
+    --surface-3: #e6eeeb;
+    --surface-hover: #dfe9e5;
+    --line: #c7d4cf;
+    --line-strong: #9fb3ab;
+    --text: #17231f;
+    --text-2: #384b44;
+    --muted: #5d7069;
+    --red: #b92f40;
+    --green: #067455;
+    --amber: #8a5700;
+    --blue: #1e64a3;
+    --ambient-1: rgba(25, 125, 91, .1);
+    --ambient-2: rgba(53, 103, 87, .07);
+    --grid-line: rgba(29, 58, 48, .035);
+    --mark-start: #e1eee9;
+    --mark-end: #f8fbfa;
+    --shadow-control: 0 5px 16px rgba(35, 57, 49, .08);
+    --shadow: 0 14px 38px rgba(35, 57, 49, .1), 0 1px 0 rgba(255, 255, 255, .7) inset;
+    --shadow-hero: 0 20px 50px rgba(35, 57, 49, .12), 0 1px 0 rgba(255, 255, 255, .8) inset;
+  }
   * { box-sizing: border-box; }
   html { background: var(--bg); }
   body { margin: 0; min-width: 320px; overflow-x: hidden; background:
-    radial-gradient(circle at 82% -8%, rgba(51, 148, 117, .16), transparent 30rem),
-    radial-gradient(circle at -8% 36%, rgba(45, 100, 84, .08), transparent 24rem),
-    linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+    radial-gradient(circle at 82% -8%, var(--ambient-1), transparent 30rem),
+    radial-gradient(circle at -8% 36%, var(--ambient-2), transparent 24rem),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
     var(--bg); background-size: auto, auto, 100% 64px, auto; }
   main { width: min(1240px, calc(100% - 2rem)); margin: 0 auto; padding: 1.75rem 0 3rem; }
   header { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-bottom: 1.25rem; padding: .5rem .1rem 1rem; border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
   .brand { display: flex; align-items: center; gap: .9rem; }
-  .mark { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line)); border-radius: var(--radius-md); background: linear-gradient(145deg, #142b24, #0d1c18); color: var(--green); box-shadow: 0 8px 24px rgba(0,0,0,.2), 0 0 20px color-mix(in srgb, var(--green) 7%, transparent); font-size: .7rem; font-weight: 900; letter-spacing: .11em; }
-  .brand p { margin: 0 0 .3rem; color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .15em; }
+  .mark { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line)); border-radius: var(--radius-md); background: linear-gradient(145deg, var(--mark-start), var(--mark-end)); color: var(--green); box-shadow: var(--shadow-control), 0 0 20px color-mix(in srgb, var(--green) 7%, transparent); font-size: var(--font-xs); font-weight: 900; letter-spacing: .11em; }
+  .brand p { margin: 0 0 .3rem; color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .15em; }
   h1 { margin: 0; font-size: clamp(1.3rem, 4vw, 1.8rem); line-height: 1.15; letter-spacing: -.035em; }
   .meta { display: flex; align-items: center; gap: 1rem; }
-  .meta > div { text-align: right; }
+  .update-meta { text-align: right; }
+  .meta-actions { display: flex; align-items: center; gap: .55rem; }
   .meta span, .meta time { display: block; }
-  .meta div > span { margin-bottom: .2rem; color: var(--muted); font-size: .68rem; }
-  .meta time { color: var(--text-2); font-size: .78rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .meta .update-meta > span { margin-bottom: .2rem; color: var(--muted); font-size: var(--font-xs); }
+  .meta time { color: var(--text-2); font-size: var(--font-sm); font-weight: 650; font-variant-numeric: tabular-nums; }
   .quality-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 1rem; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--line); box-shadow: 0 10px 30px rgba(0,0,0,.12); }
   .quality-grid > div { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; padding: .82rem .95rem .82rem 1.05rem; background: color-mix(in srgb, var(--surface) 96%, transparent); }
   .quality-grid > div::before { position: absolute; top: 50%; left: .55rem; width: 3px; height: 1.15rem; border-radius: 99px; background: var(--metric-color, var(--muted)); opacity: .7; content: ''; transform: translateY(-50%); }
@@ -128,12 +175,12 @@ const evaluation = evaluationData as EvaluationSummary;
   .quality-grid .quality-fallback { --metric-color: var(--blue); }
   .quality-grid .quality-core { --metric-color: var(--green); }
   .quality-grid .quality-date { --metric-color: var(--muted); }
-  .quality-grid span { color: var(--muted); font-size: .68rem; white-space: nowrap; }
+  .quality-grid span { color: var(--muted); font-size: var(--font-xs); white-space: nowrap; }
   .quality-grid strong { color: var(--text); font-size: 1rem; line-height: 1; font-variant-numeric: tabular-nums; }
-  .quality-grid .date { font-size: .82rem; }
+  .quality-grid .date { font-size: var(--font-sm); }
   .breakdown { margin-top: 1rem; }
   .insight-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 1rem; margin-top: 1rem; }
-  footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding: 1rem .15rem; color: var(--muted); font-size: .72rem; }
+  footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.25rem; padding: 1rem .15rem; color: var(--muted); font-size: var(--font-xs); }
   footer p { margin: 0; }
   :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
   ::selection { color: var(--text); background: color-mix(in srgb, var(--green) 28%, transparent); }
@@ -144,7 +191,7 @@ const evaluation = evaluationData as EvaluationSummary;
     .brand { align-items: center; }
     .brand h1 { line-height: 1.25; }
     .meta { width: 100%; justify-content: space-between; gap: .8rem; padding-top: .75rem; border-top: 1px solid var(--line); }
-    .meta > div { text-align: left; }
+    .update-meta { text-align: left; }
     .quality-grid { grid-template-columns: repeat(2, 1fr); }
     .quality-grid > div { padding: .75rem .75rem .75rem 1rem; }
     .insight-grid { grid-template-columns: 1fr; }
@@ -153,8 +200,6 @@ const evaluation = evaluationData as EvaluationSummary;
   @media (max-width: 390px) {
     h1 { font-size: 1.22rem; }
     .mark { width: 2.5rem; height: 2.5rem; }
-    .quality-grid span { font-size: .65rem; }
-    .quality-grid strong { font-size: .92rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
