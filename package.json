@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "fetch:data": "node --import tsx scripts/fetch-market-data.ts",
+    "collect:outcome": "node --import tsx scripts/collect-twse-outcome.ts",
     "validate:data": "node --import tsx scripts/validate-data.ts",
     "test": "vitest run"
   },

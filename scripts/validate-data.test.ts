@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { INDICATORS, type MarketIndicator, type MarketSnapshot, type SourceHealth } from '../src/lib/indicators';
+import { INDICATORS, type MarketIndicator, type MarketSnapshot, type OutcomeRecord, type SourceHealth } from '../src/lib/indicators';
+import { buildEvaluationSummary } from '../src/lib/evaluation';
 import { assessQuality } from '../src/lib/market-data';
 import { calculateSignal, explainIndicatorScore, scoreIndicator } from '../src/lib/scoring';
-import { validateHistoryIndex, validateSnapshot } from './validate-data';
+import { validateEvaluationSummary, validateHistoryIndex, validateOutcomeRecord, validateSnapshot } from './validate-data';
 
 function validSnapshot(): MarketSnapshot {
   const indicators: MarketIndicator[] = INDICATORS.map((definition) => {
@@ -41,5 +42,21 @@ describe('semantic validator', () => {
   it('rejects duplicate and unsorted history', () => {
     const entry = { date: '2026-06-24', generatedAt: '2026-06-24T01:00:00.000Z', signal: { label: '震盪' as const, score: 0, bias: 'neutral' as const }, dataQuality: validSnapshot().dataQuality };
     expect(validateHistoryIndex({ generatedAt: entry.generatedAt, entries: [entry, entry] }).join(' ')).toContain('重複');
+  });
+
+  it('catches inconsistent outcome calculations and summary counts', () => {
+    const outcome: OutcomeRecord = {
+      date: '2026-06-24', retrievedAt: '2026-06-24T06:30:00.000Z', source: 'TWSE MI_5MINS_HIST',
+      signal: { generatedAt: '2026-06-24T00:55:00.000Z', label: '偏多', score: 2, bias: 'bullish', direction: 'bullish', qualityStatus: 'ok' },
+      market: { previousClose: 100, open: 101, high: 102, low: 99, close: 100, openingGapPercent: 1, closeReturnPercent: 0 },
+      actualDirection: 'bullish', eligibility: 'eligible', exclusionReason: null, hit: true
+    };
+    expect(validateOutcomeRecord(outcome)).toEqual([]);
+    outcome.market.openingGapPercent = 2;
+    expect(validateOutcomeRecord(outcome).join(' ')).toContain('openingGapPercent');
+    outcome.market.openingGapPercent = 1;
+    const summary = buildEvaluationSummary([outcome], outcome.retrievedAt);
+    summary.eligibleCount = 2;
+    expect(validateEvaluationSummary(summary, [outcome]).join(' ')).toContain('eligibleCount');
   });
 });

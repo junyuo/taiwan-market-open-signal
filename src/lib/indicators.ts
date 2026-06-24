@@ -122,6 +122,61 @@ export interface HistoryIndex {
   entries: HistorySummary[];
 }
 
+export type MarketDirection = 'bullish' | 'neutral' | 'bearish';
+export type OutcomeExclusionReason = 'low_quality' | 'neutral_signal' | 'neutral_actual';
+
+export interface OutcomeRecord {
+  date: string;
+  retrievedAt: string;
+  source: 'TWSE MI_5MINS_HIST';
+  signal: {
+    generatedAt: string;
+    label: MarketSignal['label'];
+    score: number;
+    bias: MarketSignal['bias'];
+    direction: MarketDirection;
+    qualityStatus: DataQuality['status'];
+  };
+  market: {
+    previousClose: number;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+    openingGapPercent: number;
+    closeReturnPercent: number;
+  };
+  actualDirection: MarketDirection;
+  eligibility: 'eligible' | 'excluded';
+  exclusionReason: OutcomeExclusionReason | null;
+  hit: boolean | null;
+}
+
+export interface EvaluationMetric {
+  hits: number;
+  total: number;
+  hitRate: number | null;
+}
+
+export interface SignalLevelOutcome {
+  label: MarketSignal['label'];
+  count: number;
+  averageOpeningGapPercent: number | null;
+}
+
+export interface EvaluationSummary {
+  generatedAt: string;
+  minimumSampleSize: 20;
+  eligibleCount: number;
+  excludedCount: number;
+  isPublished: boolean;
+  period: { from: string; to: string } | null;
+  overall: EvaluationMetric;
+  bullish: EvaluationMetric;
+  bearish: EvaluationMetric;
+  bySignalLabel: SignalLevelOutcome[];
+}
+
 export const INDICATORS: IndicatorDefinition[] = [
   { id: 'sp500', name: 'S&P 500', symbol: '^GSPC', category: 'US_INDEX', core: false, maxAgeHours: 96 },
   { id: 'nasdaq', name: 'Nasdaq', symbol: '^IXIC', category: 'US_INDEX', core: true, maxAgeHours: 96 },

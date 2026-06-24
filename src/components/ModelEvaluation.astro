@@ -1,0 +1,70 @@
+---
+import type { EvaluationSummary } from '../lib/indicators';
+
+interface Props { evaluation: EvaluationSummary; }
+const { evaluation } = Astro.props;
+const progress = Math.min(100, evaluation.eligibleCount / evaluation.minimumSampleSize * 100);
+const rate = (value: number | null) => value === null ? '—' : `${(value * 100).toFixed(1)}%`;
+---
+
+<section class="evaluation-card" aria-labelledby="evaluation-title">
+  <div class="section-head">
+    <div><p>MODEL EVALUATION</p><h2 id="evaluation-title">模型驗證</h2></div>
+    <span>以台股實際開盤缺口驗證</span>
+  </div>
+  {!evaluation.isPublished ? (
+    <div class="collecting">
+      <div class="progress-copy">
+        <strong>驗證樣本累積 {evaluation.eligibleCount} / {evaluation.minimumSampleSize}</strong>
+        <span>達 20 個符合條件的交易日後才公布命中率。</span>
+      </div>
+      <div class="track" role="progressbar" aria-valuenow={evaluation.eligibleCount} aria-valuemin="0" aria-valuemax={evaluation.minimumSampleSize}>
+        <span style={`width:${progress}%`}></span>
+      </div>
+      {evaluation.excludedCount > 0 && <small>另有 {evaluation.excludedCount} 筆因中性訊號、中性開盤或資料品質非 ok 而排除。</small>}
+    </div>
+  ) : (
+    <div class="published">
+      <div class="metrics">
+        <div><span>整體開盤命中率</span><strong>{rate(evaluation.overall.hitRate)}</strong><small>{evaluation.overall.hits} / {evaluation.overall.total}</small></div>
+        <div><span>偏多訊號</span><strong>{rate(evaluation.bullish.hitRate)}</strong><small>{evaluation.bullish.hits} / {evaluation.bullish.total}</small></div>
+        <div><span>偏空訊號</span><strong>{rate(evaluation.bearish.hitRate)}</strong><small>{evaluation.bearish.hits} / {evaluation.bearish.total}</small></div>
+      </div>
+      <div class="period">
+        <span>樣本期間 <strong>{evaluation.period?.from} — {evaluation.period?.to}</strong></span>
+        <span>排除 <strong>{evaluation.excludedCount}</strong> 筆</span>
+      </div>
+    </div>
+  )}
+  <p class="note">收盤報酬僅保留於 outcome 資料供後續檢查，不列為首頁主要績效，也不會自動改寫評分權重。</p>
+</section>
+
+<style>
+  .evaluation-card { margin-top: 1.25rem; overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
+  h2 { margin: 0; font-size: 1.15rem; }
+  .section-head > span { color: var(--muted); font-size: .72rem; }
+  .collecting { padding: 1.3rem 1.5rem; }
+  .progress-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .progress-copy strong { font-size: .92rem; font-variant-numeric: tabular-nums; }
+  .progress-copy span, .collecting small { color: var(--muted); font-size: .72rem; }
+  .track { height: .5rem; margin: 1rem 0 .7rem; overflow: hidden; border-radius: 999px; background: var(--surface-3); }
+  .track span { display: block; height: 100%; border-radius: inherit; background: var(--green); }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .metrics > div { display: grid; gap: .35rem; padding: 1.25rem 1.5rem; border-right: 1px solid var(--line); }
+  .metrics > div:last-child { border-right: 0; }
+  .metrics span, .metrics small { color: var(--muted); font-size: .7rem; }
+  .metrics strong { font-size: 1.45rem; font-variant-numeric: tabular-nums; }
+  .period { display: flex; justify-content: space-between; gap: 1rem; padding: .85rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
+  .period strong { color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .note { margin: 0; padding: .8rem 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; line-height: 1.55; }
+  @media (max-width: 620px) {
+    .section-head, .progress-copy, .period { align-items: flex-start; flex-direction: column; }
+    .section-head { align-items: flex-start; }
+    .metrics { grid-template-columns: 1fr; }
+    .metrics > div { grid-template-columns: 1fr auto; align-items: baseline; border-right: 0; border-bottom: 1px solid var(--line); }
+    .metrics > div:last-child { border-bottom: 0; }
+    .metrics small { grid-column: 1 / -1; }
+  }
+</style>

@@ -2,18 +2,21 @@
 import latest from '../../public/data/latest.json';
 import statusData from '../../public/data/status.json';
 import historyData from '../../public/data/history/index.json';
+import evaluationData from '../../public/data/evaluation.json';
 import DataQualityBadge from '../components/DataQualityBadge.astro';
 import IndicatorTable from '../components/IndicatorTable.astro';
+import ModelEvaluation from '../components/ModelEvaluation.astro';
 import SignalBreakdown from '../components/SignalBreakdown.astro';
 import SignalCard from '../components/SignalCard.astro';
 import SignalHistory from '../components/SignalHistory.astro';
 import SourceHealthPanel from '../components/SourceHealthPanel.astro';
 import { formatDateTime } from '../lib/format';
-import type { DataStatus, HistoryIndex, MarketSnapshot } from '../lib/indicators';
+import type { DataStatus, EvaluationSummary, HistoryIndex, MarketSnapshot } from '../lib/indicators';
 
 const data = latest as MarketSnapshot;
 const status = statusData as DataStatus;
 const history = historyData as HistoryIndex;
+const evaluation = evaluationData as EvaluationSummary;
 ---
 
 <!doctype html>
@@ -57,6 +60,8 @@ const history = historyData as HistoryIndex;
         <SourceHealthPanel sources={data.sources} status={status} />
         <SignalHistory history={history} />
       </div>
+
+      <ModelEvaluation evaluation={evaluation} />
 
       <IndicatorTable indicators={data.indicators} />
 

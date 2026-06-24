@@ -1,0 +1,69 @@
+name: Collect TAIEX outcome
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 14 * * 1-5'
+      timezone: Asia/Taipei
+    # UTC equivalent (if timezone-aware schedules are unavailable): 06:30 UTC, Monday-Friday.
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: collect-taiex-outcome
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect TWSE outcome
+        run: npm run collect:outcome
+
+      - name: Validate all public data
+        run: npm run validate:data
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Verify site build
+        run: npm run build
+
+      - name: Commit outcome changes
+        id: commit
+        env:
+          TZ: Asia/Taipei
+        run: |
+          if git diff --quiet -- public/data/outcomes public/data/evaluation.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No outcome changes to commit (holiday, unpublished, or unchanged)."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/outcomes public/data/evaluation.json
+          git commit -m "chore(data): collect TAIEX outcome $(date '+%Y-%m-%d')"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Commits pushed by GITHUB_TOKEN do not trigger another workflow automatically.
+      - name: Deploy refreshed evaluation
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

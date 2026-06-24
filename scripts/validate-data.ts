@@ -1,7 +1,14 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { INDICATORS, type HistoryIndex, type MarketSnapshot } from '../src/lib/indicators';
+import {
+  INDICATORS,
+  type EvaluationSummary,
+  type HistoryIndex,
+  type MarketSnapshot,
+  type OutcomeRecord
+} from '../src/lib/indicators';
+import { buildEvaluationSummary, classifyOpeningGap, exclusionReason, signalDirection } from '../src/lib/evaluation';
 import { classifySignal } from '../src/lib/scoring';
 
 interface ValidationOptions {
@@ -100,6 +107,68 @@ export function validateHistoryIndex(value: unknown): string[] {
   return errors;
 }
 
+export function validateOutcomeRecord(value: unknown): string[] {
+  const errors: string[] = [];
+  if (!value || typeof value !== 'object') return ['outcome 必須是物件'];
+  const record = value as Partial<OutcomeRecord>;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(record.date ?? '')) errors.push('outcome.date 格式錯誤');
+  if (!record.retrievedAt || Number.isNaN(Date.parse(record.retrievedAt))) errors.push('outcome.retrievedAt 格式錯誤');
+  if (record.source !== 'TWSE MI_5MINS_HIST') errors.push('outcome.source 無效');
+  if (!record.signal || !record.market) return [...errors, 'outcome 缺少 signal 或 market'];
+  if (record.signal.generatedAt && Date.parse(record.signal.generatedAt) > Date.parse(record.retrievedAt ?? '')) errors.push('signal.generatedAt 不得晚於 retrievedAt');
+  const numbers = [record.market.previousClose, record.market.open, record.market.high, record.market.low, record.market.close];
+  if (numbers.some((number) => !Number.isFinite(number) || number <= 0)) errors.push('outcome OHLC 與前收必須是正數');
+  if (Number.isFinite(record.market.previousClose) && Number.isFinite(record.market.open)) {
+    const expectedGap = (record.market.open / record.market.previousClose - 1) * 100;
+    if (Math.abs(record.market.openingGapPercent - expectedGap) > 1e-9) errors.push('openingGapPercent 計算不一致');
+    if (record.actualDirection !== classifyOpeningGap(expectedGap)) errors.push('actualDirection 與開盤缺口不一致');
+  }
+  if (Number.isFinite(record.market.previousClose) && Number.isFinite(record.market.close)) {
+    const expectedReturn = (record.market.close / record.market.previousClose - 1) * 100;
+    if (Math.abs(record.market.closeReturnPercent - expectedReturn) > 1e-9) errors.push('closeReturnPercent 計算不一致');
+  }
+  const predicted = signalDirection(record.signal.bias);
+  if (record.signal.direction !== predicted) errors.push('signal.direction 與 bias 不一致');
+  const reason = exclusionReason(record.signal.qualityStatus, predicted, record.actualDirection ?? 'neutral');
+  if (record.exclusionReason !== reason) errors.push('exclusionReason 不一致');
+  if (record.eligibility !== (reason ? 'excluded' : 'eligible')) errors.push('eligibility 不一致');
+  const expectedHit = reason ? null : predicted === record.actualDirection;
+  if (record.hit !== expectedHit) errors.push('hit 不一致');
+  return errors;
+}
+
+export function validateEvaluationSummary(value: unknown, records: OutcomeRecord[]): string[] {
+  const errors: string[] = [];
+  if (!value || typeof value !== 'object') return ['evaluation 必須是物件'];
+  const summary = value as Partial<EvaluationSummary>;
+  if (!summary.generatedAt || Number.isNaN(Date.parse(summary.generatedAt))) errors.push('evaluation.generatedAt 格式錯誤');
+  if (summary.minimumSampleSize !== 20) errors.push('evaluation.minimumSampleSize 必須為 20');
+  const expected = buildEvaluationSummary(records, summary.generatedAt ?? new Date(0).toISOString());
+  for (const key of ['eligibleCount', 'excludedCount', 'isPublished'] as const) {
+    if (summary[key] !== expected[key]) errors.push(`evaluation.${key} 不一致`);
+  }
+  for (const key of ['overall', 'bullish', 'bearish'] as const) {
+    const actualMetric = summary[key];
+    const expectedMetric = expected[key];
+    if (!actualMetric || actualMetric.hits !== expectedMetric.hits || actualMetric.total !== expectedMetric.total || actualMetric.hitRate !== expectedMetric.hitRate) {
+      errors.push(`evaluation.${key} 不一致`);
+    }
+  }
+  if (JSON.stringify(summary.period) !== JSON.stringify(expected.period)) errors.push('evaluation.period 不一致');
+  if (JSON.stringify(summary.bySignalLabel) !== JSON.stringify(expected.bySignalLabel)) errors.push('evaluation.bySignalLabel 不一致');
+  return errors;
+}
+
+async function readOutcomeRecords(root: string): Promise<OutcomeRecord[]> {
+  try {
+    const names = (await readdir(root)).filter((name) => /^\d{4}-\d{2}-\d{2}\.json$/.test(name));
+    return Promise.all(names.map(async (name) => JSON.parse(await readFile(resolve(root, name), 'utf8')) as OutcomeRecord));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
 async function main(): Promise<void> {
   const filePath = resolve(process.argv[2] ?? 'public/data/latest.json');
   const data = JSON.parse(await readFile(filePath, 'utf8')) as unknown;
@@ -107,12 +176,17 @@ async function main(): Promise<void> {
   const historyPath = resolve('public/data/history/index.json');
   const history = JSON.parse(await readFile(historyPath, 'utf8')) as unknown;
   errors.push(...validateHistoryIndex(history));
+  const outcomes = await readOutcomeRecords(resolve('public/data/outcomes'));
+  for (const outcome of outcomes) errors.push(...validateOutcomeRecord(outcome));
+  const evaluationPath = resolve('public/data/evaluation.json');
+  const evaluation = JSON.parse(await readFile(evaluationPath, 'utf8')) as unknown;
+  errors.push(...validateEvaluationSummary(evaluation, outcomes));
   if (errors.length) {
     console.error(errors.join('\n'));
     process.exitCode = 1;
     return;
   }
-  console.log(`Validated ${filePath} and ${historyPath}`);
+  console.log(`Validated ${filePath}, ${historyPath}, ${outcomes.length} outcomes, and ${evaluationPath}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch((error) => {
