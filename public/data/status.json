@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-06-24T05:56:04.235Z",
-  "lastSuccessfulUpdate": "2026-06-24T05:56:04.235Z",
+  "lastUpdated": "2026-06-24T06:58:52.748Z",
+  "lastSuccessfulUpdate": "2026-06-24T06:58:52.748Z",
   "status": "ok",
   "successCount": 14,
   "failedCount": 0,
@@ -9,9 +9,8 @@
   "coreSuccessRate": 0.8571428571428571,
   "errors": [],
   "warnings": [
-    "美國 10 年期殖利率: stale (137.6 小時)",
-    "美國 10 年期殖利率: 已保留 last-good 參考值",
-    "FRED: 未設定 FRED_API_KEY"
+    "美國 10 年期殖利率: stale (138.6 小時)",
+    "美國 10 年期殖利率: 已保留 last-good 參考值"
   ],
   "sources": [
     {
@@ -20,17 +19,17 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-06-24T05:56:04.235Z",
+      "lastCheckedAt": "2026-06-24T06:58:52.748Z",
       "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "not_configured",
-      "successCount": 0,
+      "status": "ok",
+      "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-06-24T05:56:04.235Z",
-      "message": "未設定 FRED_API_KEY"
+      "lastCheckedAt": "2026-06-24T06:58:52.748Z",
+      "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
 }
