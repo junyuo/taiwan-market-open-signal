@@ -5,6 +5,7 @@ import MarketNarrative from './MarketNarrative.astro';
 interface Props { signal: MarketSignal; }
 const { signal } = Astro.props;
 const score = `${signal.score >= 0 ? '+' : ''}${signal.score}`;
+const scorePosition = Math.max(0, Math.min(100, ((signal.score + 12) / 24) * 100));
 ---
 
 <section class:list={['signal-card', signal.bias]} aria-labelledby="signal-title">
@@ -19,19 +20,33 @@ const score = `${signal.score >= 0 ? '+' : ''}${signal.score}`;
     </div>
   </div>
   <MarketNarrative summary={signal.summary} />
+  <div class="score-scale" role="img" aria-label={`訊號分數 ${score}，量尺範圍負 12 至正 12`}>
+    <div class="scale-track"><span class="score-marker" style={`left:${scorePosition}%`}></span></div>
+    <div class="scale-labels" aria-hidden="true"><span>-12 偏空</span><span>0</span><span>+12 偏多</span></div>
+  </div>
 </section>
 
 <style>
-  .signal-card { position: relative; overflow: hidden; padding: clamp(1.3rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 1rem; background: linear-gradient(135deg, var(--surface-2), var(--surface)); box-shadow: var(--shadow); }
-  .signal-card::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ''; background: var(--signal-color); }
+  .signal-card { position: relative; isolation: isolate; overflow: hidden; padding: clamp(1.25rem, 3vw, 1.85rem); border: 1px solid color-mix(in srgb, var(--signal-color) 18%, var(--line)); border-radius: var(--radius-lg); background: linear-gradient(130deg, color-mix(in srgb, var(--signal-color) 8%, var(--surface-2)) 0%, var(--surface) 58%, var(--surface-2) 100%); box-shadow: var(--shadow-hero); }
+  .signal-card::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ''; background: linear-gradient(var(--signal-color), color-mix(in srgb, var(--signal-color) 45%, transparent)); box-shadow: 0 0 24px color-mix(in srgb, var(--signal-color) 35%, transparent); }
+  .signal-card::after { position: absolute; z-index: -1; top: -8rem; right: -5rem; width: 24rem; height: 24rem; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--signal-color) 10%, transparent), transparent 68%); content: ''; pointer-events: none; }
   .strongly_bullish, .bullish { --signal-color: var(--red); }
   .neutral { --signal-color: var(--amber); }
   .strongly_bearish, .bearish { --signal-color: var(--green); }
   .signal-head { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-  .eyebrow { margin: 0 0 .65rem; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .14em; }
-  h2 { margin: 0; font-size: clamp(1.45rem, 5vw, 2.35rem); letter-spacing: -.035em; }
-  .score-box { min-width: 6.4rem; padding: .8rem 1rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--surface-3); text-align: right; }
+  .eyebrow { margin: 0 0 .55rem; color: color-mix(in srgb, var(--signal-color) 58%, var(--muted)); font-size: .67rem; font-weight: 850; letter-spacing: .16em; }
+  h2 { margin: 0; font-size: clamp(1.5rem, 5vw, 2.35rem); line-height: 1.12; letter-spacing: -.04em; }
+  .score-box { min-width: 6.5rem; padding: .72rem .95rem; border: 1px solid color-mix(in srgb, var(--signal-color) 18%, var(--line)); border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface-3) 88%, transparent); box-shadow: 0 10px 28px rgba(0,0,0,.16); text-align: right; }
   .score-box span { display: block; color: var(--muted); font-size: .72rem; }
-  .score-box strong { display: block; margin-top: .1rem; color: var(--signal-color); font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  @media (max-width: 520px) { .signal-head { align-items: flex-start; } .score-box { min-width: 5rem; } }
+  .score-box strong { display: block; margin-top: .08rem; color: var(--signal-color); font-size: 2.1rem; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 0 22px color-mix(in srgb, var(--signal-color) 20%, transparent); }
+  .score-scale { margin-top: 1.1rem; }
+  .scale-track { position: relative; height: 4px; border-radius: 99px; background: linear-gradient(90deg, color-mix(in srgb, var(--green) 58%, var(--surface-3)), var(--surface-3) 50%, color-mix(in srgb, var(--red) 58%, var(--surface-3))); }
+  .score-marker { position: absolute; top: 50%; width: .72rem; height: .72rem; border: 2px solid var(--text); border-radius: 50%; background: var(--signal-color); box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal-color) 15%, transparent), 0 0 16px color-mix(in srgb, var(--signal-color) 32%, transparent); transform: translate(-50%, -50%); }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: .48rem; color: var(--muted); font-size: .61rem; font-variant-numeric: tabular-nums; }
+  @media (max-width: 520px) {
+    .signal-head { align-items: flex-start; gap: .8rem; }
+    .score-box { min-width: 5.2rem; padding: .65rem .72rem; }
+    .score-box strong { font-size: 1.85rem; }
+    .score-scale { margin-top: .9rem; }
+  }
 </style>

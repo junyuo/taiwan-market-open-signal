@@ -6,6 +6,7 @@ interface Props { indicators: MarketIndicator[]; }
 const { indicators } = Astro.props;
 const scored = indicators.filter(({ isScored }) => isScored);
 const contextCount = indicators.length - scored.length;
+const strength = (score: number) => Math.min(100, Math.abs(score) / 3 * 100);
 ---
 
 <section class="breakdown card" aria-labelledby="breakdown-title">
@@ -15,7 +16,7 @@ const contextCount = indicators.length - scored.length;
   </div>
   <div class="driver-grid">
     {scored.map((item) => (
-      <article class:list={['driver', item.status !== 'ok' && 'unavailable']}>
+      <article class:list={['driver', item.status !== 'ok' && 'unavailable', item.score > 0 ? 'driver-positive' : item.score < 0 ? 'driver-negative' : 'driver-neutral']} style={`--strength:${strength(item.score)}%`}>
         <div class="driver-top">
           <div><strong>{item.name}</strong><span>{formatPercent(item.changePercent)}</span></div>
           <b class:list={[item.score > 0 ? 'positive' : item.score < 0 ? 'negative' : 'neutral']}>
@@ -29,30 +30,34 @@ const contextCount = indicators.length - scored.length;
 </section>
 
 <style>
-  .card { overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
-  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
   .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
   h2 { margin: 0; font-size: 1.15rem; }
-  .section-head > span { color: var(--muted); font-size: .75rem; }
+  .section-head > span { color: var(--muted); font-size: .72rem; }
   .driver-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .driver { min-width: 0; padding: 1rem 1.2rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .driver { position: relative; min-width: 0; padding: .9rem 1.1rem .95rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--driver-color, var(--muted)) 3.5%, transparent), transparent 42%); }
+  .driver::after { position: absolute; bottom: 0; left: 0; width: var(--strength); height: 2px; background: var(--driver-color, var(--muted)); opacity: .5; content: ''; }
+  .driver-positive { --driver-color: var(--red); }
+  .driver-negative { --driver-color: var(--green); }
+  .driver-neutral { --driver-color: var(--muted); }
   .driver:nth-child(2n) { border-right: 0; }
   .driver:nth-last-child(-n + 2) { border-bottom: 0; }
   .driver-top { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
   .driver-top div { display: flex; align-items: baseline; gap: .55rem; min-width: 0; }
-  .driver-top strong { font-size: .86rem; }
+  .driver-top strong { color: var(--text); font-size: .84rem; }
   .driver-top span { color: var(--muted); font-size: .72rem; font-variant-numeric: tabular-nums; }
-  b { min-width: 2.2rem; padding: .25rem .4rem; border-radius: .35rem; text-align: center; font-size: .82rem; font-variant-numeric: tabular-nums; }
+  b { min-width: 2.15rem; padding: .22rem .4rem; border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: var(--radius-sm); text-align: center; font-size: .8rem; font-variant-numeric: tabular-nums; }
   .positive { color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); }
   .negative { color: var(--green); background: color-mix(in srgb, var(--green) 10%, transparent); }
   .neutral { color: var(--muted); background: var(--surface-3); }
-  article p { margin: .55rem 0 0; color: var(--text-2); font-size: .74rem; line-height: 1.55; }
-  .unavailable { opacity: .65; }
+  article p { margin: .45rem 0 0; color: var(--text-2); font-size: .72rem; line-height: 1.5; }
+  .unavailable { filter: saturate(.55); opacity: .58; }
   @media (max-width: 720px) {
-    .section-head { align-items: flex-start; padding: 1.1rem; }
+    .section-head { align-items: flex-start; padding: 1rem; }
     .section-head > span { max-width: 9rem; text-align: right; line-height: 1.4; }
     .driver-grid { grid-template-columns: 1fr; }
-    .driver, .driver:nth-child(2n), .driver:nth-last-child(-n + 2) { border-right: 0; border-bottom: 1px solid var(--line); }
+    .driver, .driver:nth-child(2n), .driver:nth-last-child(-n + 2) { padding: .8rem .95rem .82rem; border-right: 0; border-bottom: 1px solid var(--line); }
     .driver:last-child { border-bottom: 0; }
   }
 </style>

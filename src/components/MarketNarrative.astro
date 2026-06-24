@@ -9,7 +9,8 @@ const { summary } = Astro.props;
 </div>
 
 <style>
-  .narrative { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: .8rem; margin-top: 1.4rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
-  span { padding: .25rem .45rem; border-radius: .3rem; background: var(--surface-3); color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .08em; }
-  p { margin: 0; color: var(--text-2); font-size: .98rem; line-height: 1.7; }
+  .narrative { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: .75rem; margin-top: 1.15rem; padding-top: 1rem; border-top: 1px solid color-mix(in srgb, var(--line) 78%, transparent); }
+  span { padding: .23rem .42rem; border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--surface-3) 78%, transparent); color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .08em; }
+  p { margin: 0; color: var(--text-2); font-size: clamp(.86rem, 2vw, .96rem); line-height: 1.65; }
+  @media (max-width: 520px) { .narrative { gap: .6rem; } p { line-height: 1.58; } }
 </style>

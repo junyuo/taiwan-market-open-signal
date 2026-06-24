@@ -47,25 +47,27 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
 </section>
 
 <style>
-  .table-card { margin-top: 1.25rem; overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
-  .section-head { display: flex; align-items: end; justify-content: space-between; padding: 1.3rem 1.5rem; border-bottom: 1px solid var(--line); }
+  .table-card { margin-top: 1rem; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow); }
+  .section-head { display: flex; align-items: end; justify-content: space-between; padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
   .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: .66rem; font-weight: 800; letter-spacing: .14em; }
   .section-head h2 { margin: 0; font-size: 1.15rem; }
   .section-head > span { color: var(--muted); font-size: .78rem; }
-  .table-scroll { overflow-x: auto; }
+  .table-scroll { max-height: min(70vh, 720px); overflow: auto; scrollbar-color: var(--line-strong) var(--surface-2); scrollbar-width: thin; }
+  .table-scroll:focus-visible { outline-offset: -3px; }
   .scroll-hint { display: none; }
   table { width: 100%; min-width: 1050px; border-collapse: collapse; }
-  th, td { padding: .78rem .9rem; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
-  th { color: var(--muted); background: var(--surface-2); font-size: .7rem; font-weight: 700; }
+  th, td { padding: .75rem .88rem; border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent); text-align: left; white-space: nowrap; }
+  th { position: sticky; z-index: 5; top: 0; color: var(--muted); background: color-mix(in srgb, var(--surface-2) 96%, var(--bg)); box-shadow: 0 1px 0 var(--line), 0 8px 18px rgba(0,0,0,.12); font-size: .68rem; font-weight: 750; letter-spacing: .02em; }
   td { color: var(--text-2); font-size: .8rem; }
   tbody tr:last-child td { border-bottom: 0; }
-  tbody tr:hover { background: color-mix(in srgb, var(--surface-3) 55%, transparent); }
+  tbody tr:nth-child(even) { background: color-mix(in srgb, var(--surface-2) 30%, transparent); }
+  tbody tr:hover { background: color-mix(in srgb, var(--surface-3) 68%, transparent); }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .name strong { display: block; color: var(--text); }
   .name small { display: block; margin-top: .15rem; color: var(--muted); font-size: .68rem; }
   .last-good { display: block; margin-top: .25rem; color: var(--amber); font-size: .62rem; font-weight: 500; line-height: 1.35; }
-  .category { color: var(--text-2); font-size: .72rem; }
-  .status { display: inline-flex; min-width: 2.8rem; justify-content: center; padding: .22rem .42rem; border-radius: .3rem; font-size: .68rem; font-weight: 800; }
+  .category { display: inline-flex; padding: .18rem .38rem; border: 1px solid color-mix(in srgb, var(--line) 75%, transparent); border-radius: var(--radius-sm); color: var(--text-2); background: color-mix(in srgb, var(--surface-3) 52%, transparent); font-size: .68rem; }
+  .status { display: inline-flex; min-width: 2.8rem; justify-content: center; padding: .2rem .4rem; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: var(--radius-sm); font-size: .66rem; font-weight: 800; }
   .status.ok { color: var(--green); background: color-mix(in srgb, var(--green) 10%, transparent); }
   .status.stale { color: var(--amber); background: color-mix(in srgb, var(--amber) 10%, transparent); }
   .status.failed { color: var(--red); background: color-mix(in srgb, var(--red) 10%, transparent); }
@@ -75,11 +77,14 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
   .source, .time { color: var(--muted); }
   .time small { display: block; margin-top: .15rem; font-size: .62rem; }
   @media (max-width: 720px) {
-    .section-head { padding: 1.1rem; }
-    .scroll-hint { display: block; padding: .55rem 1.1rem; border-bottom: 1px solid var(--line); color: var(--amber); background: var(--surface-2); font-size: .68rem; text-align: right; }
-    th, td { padding: .72rem; }
+    .section-head { padding: 1rem; }
+    .table-scroll { max-height: none; overflow-x: auto; overflow-y: visible; }
+    .scroll-hint { display: block; padding: .48rem 1rem; border-bottom: 1px solid var(--line); color: var(--amber); background: color-mix(in srgb, var(--surface-2) 80%, transparent); font-size: .66rem; text-align: right; }
+    th, td { padding: .68rem; }
+    th { position: static; box-shadow: none; }
     th:first-child, td:first-child { position: sticky; left: 0; z-index: 3; width: 82px; min-width: 82px; background: var(--surface); }
-    th:nth-child(2), td:nth-child(2) { position: sticky; left: 82px; z-index: 3; width: 145px; min-width: 145px; background: var(--surface); box-shadow: 8px 0 12px rgba(0, 0, 0, .18); }
+    th:nth-child(2), td:nth-child(2) { position: sticky; left: 82px; z-index: 3; width: 145px; min-width: 145px; background: var(--surface); box-shadow: 8px 0 12px rgba(0, 0, 0, .2); }
+    tbody tr:nth-child(even) td:first-child, tbody tr:nth-child(even) td:nth-child(2) { background: color-mix(in srgb, var(--surface-2) 72%, var(--surface)); }
     thead th:first-child, thead th:nth-child(2) { z-index: 4; background: var(--surface-2); }
   }
 </style>
