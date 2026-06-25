@@ -1,17 +1,14 @@
 {
-  "lastUpdated": "2026-06-24T06:58:52.748Z",
-  "lastSuccessfulUpdate": "2026-06-24T06:58:52.748Z",
+  "lastUpdated": "2026-06-25T00:23:17.413Z",
+  "lastSuccessfulUpdate": "2026-06-25T00:23:17.413Z",
   "status": "ok",
-  "successCount": 14,
+  "successCount": 15,
   "failedCount": 0,
-  "staleCount": 1,
-  "fallbackCount": 1,
-  "coreSuccessRate": 0.8571428571428571,
+  "staleCount": 0,
+  "fallbackCount": 0,
+  "coreSuccessRate": 1,
   "errors": [],
-  "warnings": [
-    "美國 10 年期殖利率: stale (138.6 小時)",
-    "美國 10 年期殖利率: 已保留 last-good 參考值"
-  ],
+  "warnings": [],
   "sources": [
     {
       "id": "yahoo",
@@ -19,7 +16,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-06-24T06:58:52.748Z",
+      "lastCheckedAt": "2026-06-25T00:23:17.413Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -28,7 +25,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-06-24T06:58:52.748Z",
+      "lastCheckedAt": "2026-06-25T00:23:17.413Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
