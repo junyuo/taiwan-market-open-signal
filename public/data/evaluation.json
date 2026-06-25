@@ -1,18 +1,53 @@
 {
-  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "generatedAt": "2026-06-25T09:51:30.503Z",
   "minimumSampleSize": 20,
   "eligibleCount": 0,
-  "excludedCount": 0,
+  "excludedCount": 1,
   "isPublished": false,
-  "period": null,
-  "overall": { "hits": 0, "total": 0, "hitRate": null },
-  "bullish": { "hits": 0, "total": 0, "hitRate": null },
-  "bearish": { "hits": 0, "total": 0, "hitRate": null },
+  "period": {
+    "from": "2026-06-25",
+    "to": "2026-06-25"
+  },
+  "overall": {
+    "hits": 0,
+    "total": 0,
+    "hitRate": null
+  },
+  "bullish": {
+    "hits": 0,
+    "total": 0,
+    "hitRate": null
+  },
+  "bearish": {
+    "hits": 0,
+    "total": 0,
+    "hitRate": null
+  },
   "bySignalLabel": [
-    { "label": "明顯偏多", "count": 0, "averageOpeningGapPercent": null },
-    { "label": "偏多", "count": 0, "averageOpeningGapPercent": null },
-    { "label": "震盪", "count": 0, "averageOpeningGapPercent": null },
-    { "label": "偏空", "count": 0, "averageOpeningGapPercent": null },
-    { "label": "明顯偏空", "count": 0, "averageOpeningGapPercent": null }
+    {
+      "label": "明顯偏多",
+      "count": 0,
+      "averageOpeningGapPercent": null
+    },
+    {
+      "label": "偏多",
+      "count": 0,
+      "averageOpeningGapPercent": null
+    },
+    {
+      "label": "震盪",
+      "count": 1,
+      "averageOpeningGapPercent": 0.6430426812847001
+    },
+    {
+      "label": "偏空",
+      "count": 0,
+      "averageOpeningGapPercent": null
+    },
+    {
+      "label": "明顯偏空",
+      "count": 0,
+      "averageOpeningGapPercent": null
+    }
   ]
 }
