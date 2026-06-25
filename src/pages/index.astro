@@ -54,7 +54,7 @@ const evaluation = evaluationData as EvaluationSummary;
         </div>
       </header>
 
-      <SignalCard signal={data.signal} />
+      <SignalCard signal={data.signal} signalDate={data.date} />
 
       <div class="quality-grid" aria-label="資料品質統計">
         <div class="quality-ok"><span>正常資料</span><strong>{data.dataQuality.successCount}</strong></div>
