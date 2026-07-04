@@ -1,14 +1,18 @@
 {
-  "lastUpdated": "2026-07-03T04:32:09.116Z",
+  "lastUpdated": "2026-07-04T01:05:23.596Z",
   "lastSuccessfulUpdate": "2026-07-03T04:32:09.116Z",
-  "status": "ok",
-  "successCount": 15,
+  "status": "degraded",
+  "successCount": 14,
   "failedCount": 0,
-  "staleCount": 0,
-  "fallbackCount": 0,
-  "coreSuccessRate": 1,
+  "staleCount": 1,
+  "fallbackCount": 1,
+  "coreSuccessRate": 0.8571428571428571,
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "美國 10 年期殖利率: stale (180.8 小時)",
+    "美國 10 年期殖利率: 已保留 last-good 參考值",
+    "FRED: FRED 觀測值超過 3 日"
+  ],
   "sources": [
     {
       "id": "yahoo",
@@ -16,17 +20,17 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-03T04:32:09.116Z",
+      "lastCheckedAt": "2026-07-04T01:05:23.596Z",
       "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "ok",
+      "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-03T04:32:09.116Z",
-      "message": "Yahoo 與 FRED 殖利率水準一致"
+      "lastCheckedAt": "2026-07-04T01:05:23.596Z",
+      "message": "FRED 觀測值超過 3 日"
     }
   ]
 }
