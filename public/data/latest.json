@@ -1,6 +1,6 @@
 {
   "date": "2026-07-05",
-  "generatedAt": "2026-07-05T04:39:04.628Z",
+  "generatedAt": "2026-07-05T04:45:59.222Z",
   "market": "TW",
   "signal": {
     "label": "明顯偏空",
@@ -69,7 +69,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "nasdaq",
@@ -87,7 +87,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "Nasdaq -0.80%，依區間規則計 -1 分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "dow",
@@ -105,7 +105,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "sox",
@@ -123,7 +123,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "SOX -5.44%，依半導體權重計 -3 分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "tsm",
@@ -141,7 +141,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "TSM ADR -2.27%，突破 ±1% 門檻",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "nvda",
@@ -159,7 +159,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "NVIDIA -1.39%，未達 ±1.5% 門檻",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "amd",
@@ -177,7 +177,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "asml",
@@ -195,7 +195,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 63.15128555555555
+      "ageHours": 63.26645055555556
     },
     {
       "id": "vix",
@@ -213,7 +213,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "VIX -2.65%，未達 ±5% 門檻",
-      "ageHours": 69.65128555555556
+      "ageHours": 69.76645055555555
     },
     {
       "id": "tnx",
@@ -266,7 +266,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 32.20128555555556,
+      "ageHours": 32.316450555555555,
       "lastGood": {
         "price": 31.92300033569336,
         "change": -0.007900238037109375,
@@ -291,7 +291,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 35.651563333333335,
+      "ageHours": 35.76672833333333,
       "lastGood": {
         "price": 68.77999877929688,
         "change": 0.089996337890625,
@@ -316,7 +316,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 35.65184111111111,
+      "ageHours": 35.76700611111111,
       "lastGood": {
         "price": 4187.2998046875,
         "change": 74.599609375,
@@ -341,7 +341,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 48 小時，本次不計分",
-      "ageHours": 52.65128555555555,
+      "ageHours": 52.76645055555556,
       "lastGood": {
         "price": 69744.0703125,
         "change": 1010.921875,
@@ -366,7 +366,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 48 小時，本次不計分",
-      "ageHours": 51.15128555555555,
+      "ageHours": 51.26645055555556,
       "lastGood": {
         "price": 23350.029296875,
         "change": 295,
@@ -391,7 +391,7 @@
       "status": "degraded",
       "successCount": 14,
       "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T04:39:04.628Z",
+      "lastCheckedAt": "2026-07-05T04:45:59.222Z",
       "message": "1 項指標抓取失敗"
     },
     {
@@ -400,7 +400,7 @@
       "status": "failed",
       "successCount": 0,
       "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T04:39:04.628Z",
+      "lastCheckedAt": "2026-07-05T04:45:59.222Z",
       "message": "Yahoo 或 FRED 缺少可比較資料"
     }
   ]
