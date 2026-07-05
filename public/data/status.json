@@ -1,16 +1,24 @@
 {
-  "lastUpdated": "2026-07-04T04:24:59.060Z",
+  "lastUpdated": "2026-07-05T01:12:36.936Z",
   "lastSuccessfulUpdate": "2026-07-03T04:32:09.116Z",
   "status": "degraded",
-  "successCount": 14,
+  "successCount": 10,
   "failedCount": 0,
-  "staleCount": 1,
-  "fallbackCount": 1,
-  "coreSuccessRate": 0.8571428571428571,
+  "staleCount": 5,
+  "fallbackCount": 5,
+  "coreSuccessRate": 0.7142857142857143,
   "errors": [],
   "warnings": [
-    "美國 10 年期殖利率: stale (184.1 小時)",
+    "美國 10 年期殖利率: stale (204.9 小時)",
+    "USD/TWD: stale (28.8 小時)",
+    "WTI 原油: stale (32.2 小時)",
+    "黃金: stale (32.2 小時)",
+    "日經 225: stale (49.2 小時)",
     "美國 10 年期殖利率: 已保留 last-good 參考值",
+    "USD/TWD: 已保留 last-good 參考值",
+    "WTI 原油: 已保留 last-good 參考值",
+    "黃金: 已保留 last-good 參考值",
+    "日經 225: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
   ],
   "sources": [
@@ -20,7 +28,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-04T04:24:59.060Z",
+      "lastCheckedAt": "2026-07-05T01:12:36.936Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -29,7 +37,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-04T04:24:59.060Z",
+      "lastCheckedAt": "2026-07-05T01:12:36.936Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
