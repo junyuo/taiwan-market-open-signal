@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-07-05T02:56:52.856Z",
-  "lastSuccessfulUpdate": "2026-07-05T02:56:52.856Z",
+  "lastUpdated": "2026-07-05T04:39:04.628Z",
+  "lastSuccessfulUpdate": "2026-07-05T04:39:04.628Z",
   "status": "ok",
   "successCount": 9,
   "failedCount": 1,
@@ -11,11 +11,11 @@
     "美國 10 年期殖利率: failed (Not enough completed price points)"
   ],
   "warnings": [
-    "USD/TWD: stale (30.5 小時)",
-    "WTI 原油: stale (33.9 小時)",
-    "黃金: stale (33.9 小時)",
-    "日經 225: stale (50.9 小時)",
-    "香港恆生: stale (49.4 小時)",
+    "USD/TWD: stale (32.2 小時)",
+    "WTI 原油: stale (35.7 小時)",
+    "黃金: stale (35.7 小時)",
+    "日經 225: stale (52.7 小時)",
+    "香港恆生: stale (51.2 小時)",
     "美國 10 年期殖利率: 已保留 last-good 參考值",
     "USD/TWD: 已保留 last-good 參考值",
     "WTI 原油: 已保留 last-good 參考值",
@@ -31,7 +31,7 @@
       "status": "degraded",
       "successCount": 14,
       "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T02:56:52.856Z",
+      "lastCheckedAt": "2026-07-05T04:39:04.628Z",
       "message": "1 項指標抓取失敗"
     },
     {
@@ -40,7 +40,7 @@
       "status": "failed",
       "successCount": 0,
       "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T02:56:52.856Z",
+      "lastCheckedAt": "2026-07-05T04:39:04.628Z",
       "message": "Yahoo 或 FRED 缺少可比較資料"
     }
   ]
