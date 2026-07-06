@@ -1,47 +1,36 @@
 {
-  "lastUpdated": "2026-07-05T04:45:59.222Z",
+  "lastUpdated": "2026-07-06T01:13:52.380Z",
   "lastSuccessfulUpdate": "2026-07-05T04:45:59.222Z",
-  "status": "ok",
-  "successCount": 9,
-  "failedCount": 1,
-  "staleCount": 5,
-  "fallbackCount": 6,
-  "coreSuccessRate": 0.7142857142857143,
-  "errors": [
-    "美國 10 年期殖利率: failed (Not enough completed price points)"
-  ],
+  "status": "degraded",
+  "successCount": 14,
+  "failedCount": 0,
+  "staleCount": 1,
+  "fallbackCount": 1,
+  "coreSuccessRate": 1,
+  "errors": [],
   "warnings": [
-    "USD/TWD: stale (32.3 小時)",
-    "WTI 原油: stale (35.8 小時)",
-    "黃金: stale (35.8 小時)",
-    "日經 225: stale (52.8 小時)",
-    "香港恆生: stale (51.3 小時)",
-    "美國 10 年期殖利率: 已保留 last-good 參考值",
-    "USD/TWD: 已保留 last-good 參考值",
-    "WTI 原油: 已保留 last-good 參考值",
-    "黃金: 已保留 last-good 參考值",
-    "日經 225: 已保留 last-good 參考值",
+    "香港恆生: stale (71.7 小時)",
     "香港恆生: 已保留 last-good 參考值",
-    "FRED: Yahoo 或 FRED 缺少可比較資料"
+    "FRED: FRED 觀測值超過 3 日"
   ],
   "sources": [
     {
       "id": "yahoo",
       "name": "Yahoo Finance",
-      "status": "degraded",
-      "successCount": 14,
-      "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T04:45:59.222Z",
-      "message": "1 項指標抓取失敗"
+      "status": "ok",
+      "successCount": 15,
+      "failedCount": 0,
+      "lastCheckedAt": "2026-07-06T01:13:52.380Z",
+      "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "failed",
-      "successCount": 0,
-      "failedCount": 1,
-      "lastCheckedAt": "2026-07-05T04:45:59.222Z",
-      "message": "Yahoo 或 FRED 缺少可比較資料"
+      "status": "degraded",
+      "successCount": 1,
+      "failedCount": 0,
+      "lastCheckedAt": "2026-07-06T01:13:52.380Z",
+      "message": "FRED 觀測值超過 3 日"
     }
   ]
 }
