@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-03T09:42:29.974Z",
+  "generatedAt": "2026-07-06T11:12:24.196Z",
   "minimumSampleSize": 20,
   "eligibleCount": 2,
-  "excludedCount": 4,
+  "excludedCount": 5,
   "isPublished": false,
   "period": {
     "from": "2026-06-25",
-    "to": "2026-07-03"
+    "to": "2026-07-06"
   },
   "overall": {
     "hits": 2,
@@ -46,8 +46,8 @@
     },
     {
       "label": "明顯偏空",
-      "count": 2,
-      "averageOpeningGapPercent": -0.409717571927265
+      "count": 3,
+      "averageOpeningGapPercent": -0.19009071191805615
     }
   ]
 }
