@@ -73,11 +73,11 @@ const evaluation = evaluationData as EvaluationSummary;
         <SignalHistory history={history} />
       </div>
 
-      <ManualUpdatePanel snapshot={data} status={status} />
-
       <ModelEvaluation evaluation={evaluation} />
 
       <IndicatorTable indicators={data.indicators} />
+
+      <ManualUpdatePanel snapshot={data} status={status} />
 
       <footer>
         <p>資料來源：Yahoo Finance chart endpoint。資料可能延遲或中斷。</p>
