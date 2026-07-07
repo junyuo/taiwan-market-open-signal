@@ -103,6 +103,14 @@ npm test
 npm run build
 ```
 
+網站首頁也提供「手動更新與驗證」操作區，連到 GitHub Actions 的手動執行頁：
+
+- **手動更新盤前資料**：開啟 `Update market data` workflow，登入 GitHub 並按 **Run workflow**。
+- **手動回收台股結果**：開啟 `Collect TAIEX outcome` workflow，登入 GitHub 並按 **Run workflow**。
+- **查看執行紀錄**：開啟 repository Actions 頁，檢查抓取、驗證、測試、build、commit 與 deploy 結果。
+
+這些按鈕只是安全的 GitHub Actions 入口；瀏覽器端不保存 GitHub token，也不直接呼叫 Yahoo、TWSE、FRED 或 GitHub API。實際觸發需要具備 repository 權限的 GitHub 帳號。
+
 啟用 FRED 交叉驗證：
 
 ```bash

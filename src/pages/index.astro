@@ -5,6 +5,7 @@ import historyData from '../../public/data/history/index.json';
 import evaluationData from '../../public/data/evaluation.json';
 import DataQualityBadge from '../components/DataQualityBadge.astro';
 import IndicatorTable from '../components/IndicatorTable.astro';
+import ManualUpdatePanel from '../components/ManualUpdatePanel.astro';
 import ModelEvaluation from '../components/ModelEvaluation.astro';
 import SignalBreakdown from '../components/SignalBreakdown.astro';
 import SignalCard from '../components/SignalCard.astro';
@@ -71,6 +72,8 @@ const evaluation = evaluationData as EvaluationSummary;
         <SourceHealthPanel sources={data.sources} status={status} />
         <SignalHistory history={history} />
       </div>
+
+      <ManualUpdatePanel snapshot={data} status={status} />
 
       <ModelEvaluation evaluation={evaluation} />
 
