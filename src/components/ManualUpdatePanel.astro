@@ -21,7 +21,7 @@ const actionsUrl = `${repositoryUrl}/actions`;
       <p>MANUAL OPERATIONS</p>
       <h2 id="manual-update-title">手動更新與驗證</h2>
     </div>
-    <span>需 GitHub repo 權限</span>
+    <span>點擊下方按鈕會開啟 GitHub Actions</span>
   </div>
 
   <div class="manual-body">
@@ -32,18 +32,18 @@ const actionsUrl = `${repositoryUrl}/actions`;
       <div><span>最後完整成功</span><strong>{status.lastSuccessfulUpdate ? `${formatDateTime(status.lastSuccessfulUpdate)}（台北）` : '尚無紀錄'}</strong></div>
     </div>
 
-    <div class="actions" aria-label="手動操作連結">
-      <a class="primary-action" href={updateWorkflowUrl} target="_blank" rel="noreferrer">
-        手動更新盤前資料
-        <span>Run workflow → fetch、validate、test、build、commit、deploy</span>
+    <div class="actions" aria-label="手動操作按鈕">
+      <a class="operation-button primary-action" href={updateWorkflowUrl} target="_blank" rel="noreferrer" aria-label="手動更新盤前資料，開啟 GitHub Actions Update market data workflow">
+        <strong>手動更新盤前資料<span aria-hidden="true">↗</span></strong>
+        <small>Run workflow 後自動 fetch、validate、test、build、commit、deploy</small>
       </a>
-      <a href={outcomeWorkflowUrl} target="_blank" rel="noreferrer">
-        手動回收台股結果
-        <span>Run workflow → collect outcome、validate、test、build、commit、deploy</span>
+      <a class="operation-button" href={outcomeWorkflowUrl} target="_blank" rel="noreferrer" aria-label="手動回收台股結果，開啟 GitHub Actions Collect TAIEX outcome workflow">
+        <strong>手動回收台股結果<span aria-hidden="true">↗</span></strong>
+        <small>Run workflow 後自動 collect outcome、validate、test、build、commit、deploy</small>
       </a>
-      <a href={actionsUrl} target="_blank" rel="noreferrer">
-        查看執行紀錄
-        <span>檢查 schedule、manual run、commit 與 Pages deploy 狀態</span>
+      <a class="operation-button" href={actionsUrl} target="_blank" rel="noreferrer" aria-label="查看執行紀錄，開啟 GitHub Actions 頁面">
+        <strong>查看執行紀錄<span aria-hidden="true">↗</span></strong>
+        <small>檢查 schedule、manual run、commit 與 Pages deploy 狀態</small>
       </a>
     </div>
 
@@ -59,7 +59,7 @@ const actionsUrl = `${repositoryUrl}/actions`;
   .section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
   .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .14em; }
   h2 { margin: 0; font-size: 1.25rem; }
-  .section-head > span { color: var(--muted); font-size: var(--font-sm); }
+  .section-head > span { color: var(--muted); font-size: var(--font-sm); text-align: right; }
   .manual-body { padding: var(--space-card); }
   .status-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: .65rem; }
   .status-strip > div { min-width: 0; padding: .72rem .78rem; border: 1px solid color-mix(in srgb, var(--line) 82%, transparent); border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface-2) 46%, transparent); }
@@ -70,19 +70,68 @@ const actionsUrl = `${repositoryUrl}/actions`;
   .quality.degraded { color: var(--amber); }
   .quality.failed { color: var(--red); }
   .actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: .9rem; }
-  a { display: grid; gap: .34rem; min-height: 5.2rem; padding: .9rem .95rem; border: 1px solid color-mix(in srgb, var(--line-strong) 72%, transparent); border-radius: var(--radius-md); color: var(--text); background: linear-gradient(145deg, color-mix(in srgb, var(--surface-3) 52%, transparent), color-mix(in srgb, var(--surface-2) 28%, transparent)); font-size: var(--font-body); font-weight: 850; text-decoration: none; box-shadow: var(--shadow-control); }
-  a:hover, a:focus-visible { border-color: color-mix(in srgb, var(--blue) 58%, var(--line-strong)); background: color-mix(in srgb, var(--blue) 9%, var(--surface-2)); outline: 2px solid color-mix(in srgb, var(--blue) 45%, transparent); outline-offset: 2px; }
-  a span { color: var(--muted); font-size: var(--font-xs); font-weight: 600; line-height: 1.45; }
-  .primary-action { border-color: color-mix(in srgb, var(--blue) 42%, var(--line)); background: linear-gradient(145deg, color-mix(in srgb, var(--blue) 13%, var(--surface-2)), color-mix(in srgb, var(--surface-3) 42%, transparent)); }
+  .operation-button {
+    position: relative;
+    display: grid;
+    gap: .4rem;
+    min-height: 5rem;
+    padding: .86rem .95rem .92rem;
+    border: 1px solid color-mix(in srgb, var(--line-strong) 86%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--blue) 24%, var(--line-strong));
+    border-radius: var(--radius-md);
+    color: var(--text);
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--surface-hover) 78%, transparent), color-mix(in srgb, var(--surface-2) 55%, transparent)),
+      var(--surface-2);
+    box-shadow: var(--shadow-control), inset 0 1px 0 color-mix(in srgb, var(--text) 8%, transparent);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color .16s ease, background .16s ease, box-shadow .16s ease, transform .16s ease;
+  }
+  .operation-button::after {
+    position: absolute;
+    inset: auto .85rem .58rem .85rem;
+    height: 2px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--blue) 40%, transparent);
+    content: '';
+  }
+  .operation-button strong { display: flex; align-items: center; justify-content: space-between; gap: .75rem; color: var(--text); font-size: var(--font-body); line-height: 1.25; }
+  .operation-button strong span { display: inline-grid; place-items: center; flex: 0 0 1.55rem; width: 1.55rem; height: 1.55rem; border: 1px solid color-mix(in srgb, var(--blue) 30%, var(--line)); border-radius: 999px; color: var(--blue); background: color-mix(in srgb, var(--blue) 10%, transparent); font-size: .9rem; line-height: 1; }
+  .operation-button small { padding-right: 1.65rem; color: var(--muted); font-size: var(--font-xs); font-weight: 600; line-height: 1.45; }
+  .operation-button:hover,
+  .operation-button:focus-visible {
+    border-color: color-mix(in srgb, var(--blue) 62%, var(--line-strong));
+    background: color-mix(in srgb, var(--blue) 10%, var(--surface-2));
+    box-shadow: 0 14px 36px color-mix(in srgb, var(--blue) 13%, transparent), var(--shadow-control), inset 0 1px 0 color-mix(in srgb, var(--text) 10%, transparent);
+    outline: 2px solid color-mix(in srgb, var(--blue) 55%, transparent);
+    outline-offset: 3px;
+    transform: translateY(-1px);
+  }
+  .operation-button:active { transform: translateY(0); }
+  .primary-action {
+    border-color: color-mix(in srgb, var(--blue) 68%, var(--line));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--blue) 24%, var(--surface-2)), color-mix(in srgb, var(--blue) 12%, var(--surface-3))),
+      var(--surface-2);
+  }
+  .primary-action::after { background: color-mix(in srgb, var(--blue) 74%, transparent); }
+  .primary-action strong span { color: var(--text); background: color-mix(in srgb, var(--blue) 34%, transparent); border-color: color-mix(in srgb, var(--blue) 62%, var(--line)); }
   .safety-note { margin: .9rem 0 0; color: var(--muted); font-size: var(--font-sm); line-height: 1.65; }
   .safety-note strong { color: var(--text-2); }
   @media (max-width: 820px) {
     .status-strip { grid-template-columns: repeat(2, 1fr); }
     .actions { grid-template-columns: 1fr; }
-    a { min-height: auto; }
+    .operation-button { min-height: auto; }
   }
   @media (max-width: 520px) {
     .section-head { align-items: flex-start; flex-direction: column; gap: .45rem; }
+    .section-head > span { text-align: left; }
     .status-strip { grid-template-columns: 1fr; }
+    .operation-button { padding: .82rem .88rem .9rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .operation-button { transition: none; }
+    .operation-button:hover, .operation-button:focus-visible { transform: none; }
   }
 </style>
