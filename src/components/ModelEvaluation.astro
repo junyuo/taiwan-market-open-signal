@@ -1,10 +1,24 @@
 ---
-import type { EvaluationSummary } from '../lib/indicators';
+import type { EvaluationSummary, OutcomeRecord } from '../lib/indicators';
 
-interface Props { evaluation: EvaluationSummary; }
-const { evaluation } = Astro.props;
+interface Props { evaluation: EvaluationSummary; outcomes: OutcomeRecord[]; }
+const { evaluation, outcomes } = Astro.props;
 const progress = Math.min(100, evaluation.eligibleCount / evaluation.minimumSampleSize * 100);
 const rate = (value: number | null) => value === null ? '—' : `${(value * 100).toFixed(1)}%`;
+const reasonLabels: Record<NonNullable<OutcomeRecord['exclusionReason']>, string> = {
+  neutral_signal: '中性訊號',
+  neutral_actual: '中性開盤',
+  low_quality: '資料品質非 ok'
+};
+const excludedReasons = outcomes
+  .filter(({ eligibility }) => eligibility === 'excluded')
+  .reduce((counts, record) => {
+    if (record.exclusionReason) counts[record.exclusionReason] = (counts[record.exclusionReason] ?? 0) + 1;
+    return counts;
+  }, {} as Partial<Record<NonNullable<OutcomeRecord['exclusionReason']>, number>>);
+const reasonBreakdown = Object.entries(reasonLabels)
+  .map(([reason, label]) => ({ label, count: excludedReasons[reason as keyof typeof excludedReasons] ?? 0 }))
+  .filter(({ count }) => count > 0);
 ---
 
 <section class="evaluation-card" aria-labelledby="evaluation-title">
@@ -21,7 +35,17 @@ const rate = (value: number | null) => value === null ? '—' : `${(value * 100)
       <div class="track" role="progressbar" aria-valuenow={evaluation.eligibleCount} aria-valuemin="0" aria-valuemax={evaluation.minimumSampleSize}>
         <span style={`width:${progress}%`}></span>
       </div>
-      {evaluation.excludedCount > 0 && <small>另有 {evaluation.excludedCount} 筆因中性訊號、中性開盤或資料品質非 ok 而排除。</small>}
+      {evaluation.excludedCount > 0 && (
+        <div class="excluded-note">
+          <strong>不納入命中率的樣本 {evaluation.excludedCount} 筆</strong>
+          <span>這些紀錄仍會保留供檢查，但不參與命中率計算。</span>
+          {reasonBreakdown.length > 0 && (
+            <ul aria-label="排除原因分布">
+              {reasonBreakdown.map(({ label, count }) => <li>{label}<b>{count}</b></li>)}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   ) : (
     <div class="published">
@@ -48,9 +72,15 @@ const rate = (value: number | null) => value === null ? '—' : `${(value * 100)
   .collecting { padding: 1.05rem var(--space-card); }
   .progress-copy { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
   .progress-copy strong { font-size: .92rem; font-variant-numeric: tabular-nums; }
-  .progress-copy span, .collecting small { color: var(--muted); font-size: var(--font-body); }
+  .progress-copy span { color: var(--muted); font-size: var(--font-body); }
   .track { height: .42rem; margin: .85rem 0 .6rem; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 70%, transparent); border-radius: 999px; background: var(--surface-3); box-shadow: inset 0 1px 3px rgba(0,0,0,.28); }
   .track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, color-mix(in srgb, var(--green) 65%, var(--blue)), var(--green)); box-shadow: 0 0 14px color-mix(in srgb, var(--green) 28%, transparent); }
+  .excluded-note { display: grid; gap: .38rem; margin-top: .72rem; padding: .75rem .85rem; border: 1px solid color-mix(in srgb, var(--amber) 24%, var(--line)); border-radius: var(--radius-md); color: var(--text-2); background: color-mix(in srgb, var(--amber) 6%, var(--surface-2)); }
+  .excluded-note strong { font-size: var(--font-body); }
+  .excluded-note span { color: var(--muted); font-size: var(--font-sm); line-height: 1.5; }
+  .excluded-note ul { display: flex; flex-wrap: wrap; gap: .45rem; margin: .1rem 0 0; padding: 0; list-style: none; }
+  .excluded-note li { display: inline-flex; align-items: center; gap: .38rem; padding: .24rem .48rem; border: 1px solid color-mix(in srgb, var(--line) 72%, transparent); border-radius: 999px; color: var(--muted); background: color-mix(in srgb, var(--surface) 70%, transparent); font-size: var(--font-xs); }
+  .excluded-note b { color: var(--text); font-variant-numeric: tabular-nums; }
   .metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
   .metrics > div { display: grid; gap: .35rem; padding: 1.05rem var(--space-card); border-right: 1px solid var(--line); background: linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 35%, transparent), transparent); }
   .metrics > div:last-child { border-right: 0; }

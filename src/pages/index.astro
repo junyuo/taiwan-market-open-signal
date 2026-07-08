@@ -13,12 +13,14 @@ import SignalHistory from '../components/SignalHistory.astro';
 import SourceHealthPanel from '../components/SourceHealthPanel.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 import { formatDateTime } from '../lib/format';
-import type { DataStatus, EvaluationSummary, HistoryIndex, MarketSnapshot } from '../lib/indicators';
+import type { DataStatus, EvaluationSummary, HistoryIndex, MarketSnapshot, OutcomeRecord } from '../lib/indicators';
 
 const data = latest as MarketSnapshot;
 const status = statusData as DataStatus;
 const history = historyData as HistoryIndex;
 const evaluation = evaluationData as EvaluationSummary;
+const outcomeModules = import.meta.glob('../../public/data/outcomes/*.json', { eager: true, import: 'default' });
+const outcomes = Object.values(outcomeModules) as OutcomeRecord[];
 ---
 
 <!doctype html>
@@ -55,6 +57,15 @@ const evaluation = evaluationData as EvaluationSummary;
         </div>
       </header>
 
+      <nav class="page-nav" aria-label="頁面區塊導覽">
+        <a href="#signal-title">訊號</a>
+        <a href="#breakdown-title">拆解</a>
+        <a href="#history-title">趨勢</a>
+        <a href="#evaluation-title">驗證</a>
+        <a href="#indicator-title">指標</a>
+        <a href="#manual-update-title">手動更新</a>
+      </nav>
+
       <SignalCard signal={data.signal} signalDate={data.date} />
 
       <div class="quality-grid" aria-label="資料品質統計">
@@ -73,7 +84,7 @@ const evaluation = evaluationData as EvaluationSummary;
         <SignalHistory history={history} />
       </div>
 
-      <ModelEvaluation evaluation={evaluation} />
+      <ModelEvaluation evaluation={evaluation} outcomes={outcomes} />
 
       <IndicatorTable indicators={data.indicators} />
 
@@ -152,6 +163,7 @@ const evaluation = evaluationData as EvaluationSummary;
   }
   * { box-sizing: border-box; }
   html { background: var(--bg); }
+  [id] { scroll-margin-top: 1rem; }
   body { margin: 0; min-width: 320px; overflow-x: hidden; background:
     radial-gradient(circle at 82% -8%, var(--ambient-1), transparent 30rem),
     radial-gradient(circle at -8% 36%, var(--ambient-2), transparent 24rem),
@@ -169,6 +181,10 @@ const evaluation = evaluationData as EvaluationSummary;
   .meta span, .meta time { display: block; }
   .meta .update-meta > span { margin-bottom: .2rem; color: var(--muted); font-size: var(--font-xs); }
   .meta time { color: var(--text-2); font-size: var(--font-sm); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .page-nav { display: flex; gap: .45rem; margin: -0.35rem 0 1rem; overflow-x: auto; padding: .15rem .05rem .35rem; scrollbar-width: none; }
+  .page-nav::-webkit-scrollbar { display: none; }
+  .page-nav a { flex: 0 0 auto; padding: .42rem .72rem; border: 1px solid color-mix(in srgb, var(--line) 86%, transparent); border-radius: 999px; color: var(--text-2); background: color-mix(in srgb, var(--surface-2) 62%, transparent); box-shadow: var(--shadow-control); font-size: var(--font-xs); font-weight: 800; text-decoration: none; white-space: nowrap; }
+  .page-nav a:hover, .page-nav a:focus-visible { border-color: color-mix(in srgb, var(--blue) 54%, var(--line)); color: var(--text); background: color-mix(in srgb, var(--blue) 9%, var(--surface-2)); }
   .quality-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 1rem; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--line); box-shadow: 0 10px 30px rgba(0,0,0,.12); }
   .quality-grid > div { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; padding: .82rem .95rem .82rem 1.05rem; background: color-mix(in srgb, var(--surface) 96%, transparent); }
   .quality-grid > div::before { position: absolute; top: 50%; left: .55rem; width: 3px; height: 1.15rem; border-radius: 99px; background: var(--metric-color, var(--muted)); opacity: .7; content: ''; transform: translateY(-50%); }

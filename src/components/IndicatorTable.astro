@@ -44,6 +44,32 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
       </tbody>
     </table>
   </div>
+  <div class="indicator-cards" aria-label="全球市場指標卡片列表">
+    {indicators.map((item) => (
+      <article class:list={['indicator-card', item.status !== 'ok' && 'muted-card']}>
+        <div class="card-top">
+          <div>
+            <span class="category">{CATEGORY_LABELS[item.category]}</span>
+            <h3>{item.name}</h3>
+            <small>{item.symbol} · {item.isScored ? '計分指標' : '背景觀察'}</small>
+          </div>
+          <span class:list={['status', item.status]}>{statusLabels[item.status]}</span>
+        </div>
+        <div class="card-metrics">
+          <div><span>最新</span><strong>{formatNumber(item.price)}</strong></div>
+          <div><span>漲跌幅</span><strong class:list={[item.changePercent !== null && (item.changePercent > 0 ? 'up' : item.changePercent < 0 ? 'down' : '')]}>{formatPercent(item.changePercent)}</strong></div>
+          <div><span>分數</span><strong class:list={[item.score > 0 ? 'up' : item.score < 0 ? 'down' : '']}>{item.score > 0 ? `+${item.score}` : item.score}</strong></div>
+        </div>
+        <div class="card-meta">
+          <span>{formatDateTime(item.timestamp)}{item.ageHours !== null && ` · ${Math.max(0, item.ageHours).toFixed(1)} 小時前`}</span>
+          <span>{item.source}</span>
+        </div>
+        {item.lastGood && (
+          <p class="last-good">Last-good：{formatNumber(item.lastGood.price)}（{formatDateTime(item.lastGood.timestamp)}）</p>
+        )}
+      </article>
+    ))}
+  </div>
 </section>
 
 <style>
@@ -55,6 +81,7 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
   .table-scroll { max-height: min(70vh, 720px); overflow: auto; scrollbar-color: var(--line-strong) var(--surface-2); scrollbar-width: thin; }
   .table-scroll:focus-visible { outline-offset: -3px; }
   .scroll-hint { display: none; }
+  .indicator-cards { display: none; }
   table { width: 100%; min-width: 1120px; border-collapse: collapse; }
   th, td { padding: .75rem .88rem; border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent); text-align: left; white-space: nowrap; }
   th { position: sticky; z-index: 5; top: 0; color: var(--muted); background: color-mix(in srgb, var(--surface-2) 96%, var(--bg)); box-shadow: 0 1px 0 var(--line), 0 8px 18px color-mix(in srgb, var(--text) 8%, transparent); font-size: var(--font-xs); font-weight: 750; letter-spacing: .02em; }
@@ -76,6 +103,8 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
   .muted-row { background: color-mix(in srgb, var(--amber) 5%, var(--surface)); }
   .source, .time { color: var(--muted); }
   .time small { display: block; margin-top: .15rem; font-size: var(--font-xs); }
+  .card-top h3 { margin: .35rem 0 .15rem; color: var(--text); font-size: .98rem; line-height: 1.2; }
+  .card-top small { color: var(--muted); font-size: var(--font-xs); }
   @media (max-width: 720px) {
     .section-head { padding: 1rem; }
     .table-scroll { max-height: none; overflow-x: auto; overflow-y: visible; }
@@ -86,5 +115,21 @@ const statusLabels = { ok: '正常', stale: '過期', failed: '失敗' };
     th:nth-child(2), td:nth-child(2) { position: sticky; left: 82px; z-index: 3; width: 145px; min-width: 145px; background: var(--surface); box-shadow: 8px 0 12px rgba(0, 0, 0, .2); }
     tbody tr:nth-child(even) td:first-child, tbody tr:nth-child(even) td:nth-child(2) { background: color-mix(in srgb, var(--surface-2) 72%, var(--surface)); }
     thead th:first-child, thead th:nth-child(2) { z-index: 4; background: var(--surface-2); }
+  }
+  @media (max-width: 620px) {
+    .table-scroll, .scroll-hint { display: none; }
+    .indicator-cards { display: grid; gap: .72rem; padding: .85rem; }
+    .indicator-card { display: grid; gap: .75rem; padding: .88rem; border: 1px solid color-mix(in srgb, var(--line) 86%, transparent); border-radius: var(--radius-md); background: linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 58%, transparent), color-mix(in srgb, var(--surface) 88%, transparent)); box-shadow: var(--shadow-control); }
+    .muted-card { border-color: color-mix(in srgb, var(--amber) 28%, var(--line)); background: color-mix(in srgb, var(--amber) 6%, var(--surface)); }
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; }
+    .card-metrics { display: grid; grid-template-columns: 1.15fr .95fr .7fr; gap: 1px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--line) 72%, transparent); border-radius: var(--radius-sm); background: var(--line); }
+    .card-metrics > div { display: grid; gap: .25rem; min-width: 0; padding: .58rem .62rem; background: color-mix(in srgb, var(--surface) 94%, transparent); }
+    .card-metrics span { color: var(--muted); font-size: var(--font-xs); }
+    .card-metrics strong { overflow: hidden; color: var(--text); font-size: .92rem; font-variant-numeric: tabular-nums; text-overflow: ellipsis; white-space: nowrap; }
+    .card-metrics strong.up { color: var(--red); }
+    .card-metrics strong.down { color: var(--green); }
+    .card-meta { display: flex; justify-content: space-between; gap: .75rem; color: var(--muted); font-size: var(--font-xs); line-height: 1.45; }
+    .card-meta span:last-child { text-align: right; }
+    .indicator-card .last-good { margin: -.1rem 0 0; padding: .55rem .65rem; border: 1px solid color-mix(in srgb, var(--amber) 30%, var(--line)); border-radius: var(--radius-sm); background: color-mix(in srgb, var(--amber) 8%, transparent); }
   }
 </style>

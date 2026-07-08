@@ -8,10 +8,21 @@ interface Props {
 }
 const { sources, status } = Astro.props;
 const labels = { ok: '正常', degraded: '需留意', failed: '失敗', not_configured: '未設定' };
+const qualityCopy = {
+  ok: '目前資料完整，可用於盤前判讀。',
+  degraded: '目前資料仍可參考，但需留意下列來源提醒。',
+  failed: '目前資料不足，不建議用於盤前判讀。'
+};
+const primaryIssue = status.errors[0] ?? status.warnings[0] ?? null;
 ---
 
 <section class="health-card card" aria-labelledby="source-health-title">
   <div class="section-head"><div><p>DATA PROVENANCE</p><h2 id="source-health-title">來源健康</h2></div></div>
+  <div class:list={['quality-summary', status.status]}>
+    <strong>判讀狀態：{status.status === 'ok' ? '可用' : status.status === 'degraded' ? '可參考，需留意' : '不足'}</strong>
+    <span>{qualityCopy[status.status]}</span>
+    {primaryIssue && <small>{primaryIssue}</small>}
+  </div>
   <div class="sources">
     {sources.map((source) => (
       <article>
@@ -33,6 +44,12 @@ const labels = { ok: '正常', degraded: '需留意', failed: '失敗', not_conf
   .section-head { padding: var(--space-card); border-bottom: 1px solid var(--line); background: linear-gradient(90deg, color-mix(in srgb, var(--surface-2) 75%, transparent), transparent); }
   .section-head p { margin: 0 0 .35rem; color: var(--muted); font-size: var(--font-xs); font-weight: 800; letter-spacing: .14em; }
   h2 { margin: 0; font-size: 1.25rem; }
+  .quality-summary { display: grid; gap: .25rem; padding: .85rem 1.05rem; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface-2) 38%, transparent); }
+  .quality-summary strong { font-size: var(--font-body); }
+  .quality-summary span, .quality-summary small { color: var(--muted); font-size: var(--font-sm); line-height: 1.5; }
+  .quality-summary.ok strong { color: var(--green); }
+  .quality-summary.degraded strong { color: var(--amber); }
+  .quality-summary.failed strong { color: var(--red); }
   .sources { display: grid; grid-template-columns: repeat(2, 1fr); }
   article { padding: .9rem 1.05rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 34%, transparent), transparent); }
   article:last-child { border-right: 0; }
