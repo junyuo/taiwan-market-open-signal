@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-07-09T04:39:00.404Z",
+  "generatedAt": "2026-07-10T01:06:42.507Z",
   "entries": [
+    {
+      "date": "2026-07-10",
+      "generatedAt": "2026-07-10T01:06:42.507Z",
+      "signal": {
+        "label": "明顯偏多",
+        "score": 6,
+        "bias": "strongly_bullish"
+      },
+      "dataQuality": {
+        "status": "ok",
+        "successCount": 15,
+        "failedCount": 0,
+        "staleCount": 0,
+        "fallbackCount": 0,
+        "coreSuccessRate": 1
+      }
+    },
     {
       "date": "2026-07-09",
       "generatedAt": "2026-07-09T04:39:00.404Z",
