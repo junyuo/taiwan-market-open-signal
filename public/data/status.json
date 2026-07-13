@@ -1,18 +1,14 @@
 {
-  "lastUpdated": "2026-07-13T04:09:05.706Z",
+  "lastUpdated": "2026-07-13T04:22:00.123Z",
   "lastSuccessfulUpdate": "2026-07-11T03:57:03.476Z",
   "status": "degraded",
-  "successCount": 13,
+  "successCount": 15,
   "failedCount": 0,
-  "staleCount": 2,
-  "fallbackCount": 2,
+  "staleCount": 0,
+  "fallbackCount": 0,
   "coreSuccessRate": 1,
   "errors": [],
   "warnings": [
-    "WTI 原油: stale (72.2 小時)",
-    "黃金: stale (72.2 小時)",
-    "WTI 原油: 已保留 last-good 參考值",
-    "黃金: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
   ],
   "sources": [
@@ -22,7 +18,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-13T04:09:05.706Z",
+      "lastCheckedAt": "2026-07-13T04:22:00.123Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -31,7 +27,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-13T04:09:05.706Z",
+      "lastCheckedAt": "2026-07-13T04:22:00.123Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
