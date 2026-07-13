@@ -1,16 +1,18 @@
 {
-  "lastUpdated": "2026-07-13T00:59:55.925Z",
+  "lastUpdated": "2026-07-13T04:09:05.706Z",
   "lastSuccessfulUpdate": "2026-07-11T03:57:03.476Z",
   "status": "degraded",
-  "successCount": 14,
+  "successCount": 13,
   "failedCount": 0,
-  "staleCount": 1,
-  "fallbackCount": 1,
+  "staleCount": 2,
+  "fallbackCount": 2,
   "coreSuccessRate": 1,
   "errors": [],
   "warnings": [
-    "香港恆生: stale (71.5 小時)",
-    "香港恆生: 已保留 last-good 參考值",
+    "WTI 原油: stale (72.2 小時)",
+    "黃金: stale (72.2 小時)",
+    "WTI 原油: 已保留 last-good 參考值",
+    "黃金: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
   ],
   "sources": [
@@ -20,7 +22,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-13T00:59:55.925Z",
+      "lastCheckedAt": "2026-07-13T04:09:05.706Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -29,7 +31,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-13T00:59:55.925Z",
+      "lastCheckedAt": "2026-07-13T04:09:05.706Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
