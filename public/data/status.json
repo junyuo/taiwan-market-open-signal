@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-20T01:01:08.465Z",
+  "lastUpdated": "2026-07-20T01:14:46.978Z",
   "lastSuccessfulUpdate": "2026-07-18T03:46:22.457Z",
   "status": "degraded",
   "successCount": 13,
@@ -9,8 +9,8 @@
   "coreSuccessRate": 1,
   "errors": [],
   "warnings": [
-    "日經 225: stale (73.0 小時)",
-    "香港恆生: stale (71.5 小時)",
+    "日經 225: stale (73.2 小時)",
+    "香港恆生: stale (71.7 小時)",
     "日經 225: 已保留 last-good 參考值",
     "香港恆生: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
@@ -22,7 +22,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-20T01:01:08.465Z",
+      "lastCheckedAt": "2026-07-20T01:14:46.978Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -31,7 +31,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-20T01:01:08.465Z",
+      "lastCheckedAt": "2026-07-20T01:14:46.978Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
