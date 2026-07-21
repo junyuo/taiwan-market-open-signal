@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-07-20T04:26:54.770Z",
+  "generatedAt": "2026-07-21T00:32:22.363Z",
   "entries": [
+    {
+      "date": "2026-07-21",
+      "generatedAt": "2026-07-21T00:32:22.363Z",
+      "signal": {
+        "label": "震盪",
+        "score": 1,
+        "bias": "neutral"
+      },
+      "dataQuality": {
+        "status": "degraded",
+        "successCount": 14,
+        "failedCount": 0,
+        "staleCount": 1,
+        "fallbackCount": 1,
+        "coreSuccessRate": 1
+      }
+    },
     {
       "date": "2026-07-20",
       "generatedAt": "2026-07-20T04:26:54.770Z",
