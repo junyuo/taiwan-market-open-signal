@@ -1,17 +1,14 @@
 {
-  "lastUpdated": "2026-07-22T00:14:17.993Z",
-  "lastSuccessfulUpdate": "2026-07-22T00:14:17.993Z",
+  "lastUpdated": "2026-07-22T03:57:09.758Z",
+  "lastSuccessfulUpdate": "2026-07-22T03:57:09.758Z",
   "status": "ok",
-  "successCount": 14,
+  "successCount": 15,
   "failedCount": 0,
-  "staleCount": 1,
-  "fallbackCount": 1,
+  "staleCount": 0,
+  "fallbackCount": 0,
   "coreSuccessRate": 1,
   "errors": [],
-  "warnings": [
-    "日經 225: stale (120.2 小時)",
-    "日經 225: 已保留 last-good 參考值"
-  ],
+  "warnings": [],
   "sources": [
     {
       "id": "yahoo",
@@ -19,7 +16,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-22T00:14:17.993Z",
+      "lastCheckedAt": "2026-07-22T03:57:09.758Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -28,7 +25,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-22T00:14:17.993Z",
+      "lastCheckedAt": "2026-07-22T03:57:09.758Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
