@@ -1,19 +1,14 @@
 {
-  "lastUpdated": "2026-07-22T04:01:37.739Z",
-  "lastSuccessfulUpdate": "2026-07-22T04:01:37.739Z",
+  "lastUpdated": "2026-07-23T00:58:08.456Z",
+  "lastSuccessfulUpdate": "2026-07-23T00:58:08.456Z",
   "status": "ok",
-  "successCount": 13,
+  "successCount": 15,
   "failedCount": 0,
-  "staleCount": 2,
-  "fallbackCount": 2,
+  "staleCount": 0,
+  "fallbackCount": 0,
   "coreSuccessRate": 1,
   "errors": [],
-  "warnings": [
-    "WTI 原油: stale (24.0 小時)",
-    "黃金: stale (24.0 小時)",
-    "WTI 原油: 已保留 last-good 參考值",
-    "黃金: 已保留 last-good 參考值"
-  ],
+  "warnings": [],
   "sources": [
     {
       "id": "yahoo",
@@ -21,7 +16,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-22T04:01:37.739Z",
+      "lastCheckedAt": "2026-07-23T00:58:08.456Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -30,7 +25,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-22T04:01:37.739Z",
+      "lastCheckedAt": "2026-07-23T00:58:08.456Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
