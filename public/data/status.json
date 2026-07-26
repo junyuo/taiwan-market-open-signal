@@ -1,18 +1,25 @@
 {
-  "lastUpdated": "2026-07-25T03:54:46.516Z",
+  "lastUpdated": "2026-07-26T01:04:10.439Z",
   "lastSuccessfulUpdate": "2026-07-25T03:54:46.516Z",
-  "status": "ok",
-  "successCount": 13,
+  "status": "degraded",
+  "successCount": 10,
   "failedCount": 0,
-  "staleCount": 2,
-  "fallbackCount": 2,
-  "coreSuccessRate": 1,
+  "staleCount": 5,
+  "fallbackCount": 5,
+  "coreSuccessRate": 0.8571428571428571,
   "errors": [],
   "warnings": [
-    "日經 225: stale (51.9 小時)",
-    "香港恆生: stale (50.4 小時)",
+    "USD/TWD: stale (25.9 小時)",
+    "WTI 原油: stale (45.1 小時)",
+    "黃金: stale (45.1 小時)",
+    "日經 225: stale (73.1 小時)",
+    "香港恆生: stale (71.6 小時)",
+    "USD/TWD: 已保留 last-good 參考值",
+    "WTI 原油: 已保留 last-good 參考值",
+    "黃金: 已保留 last-good 參考值",
     "日經 225: 已保留 last-good 參考值",
-    "香港恆生: 已保留 last-good 參考值"
+    "香港恆生: 已保留 last-good 參考值",
+    "FRED: FRED 觀測值超過 3 日"
   ],
   "sources": [
     {
@@ -21,17 +28,17 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-25T03:54:46.516Z",
+      "lastCheckedAt": "2026-07-26T01:04:10.439Z",
       "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "ok",
+      "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-07-25T03:54:46.516Z",
-      "message": "Yahoo 與 FRED 殖利率水準一致"
+      "lastCheckedAt": "2026-07-26T01:04:10.439Z",
+      "message": "FRED 觀測值超過 3 日"
     }
   ]
 }
