@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-07-28T00:53:38.110Z",
+  "generatedAt": "2026-07-28T03:46:28.720Z",
   "entries": [
     {
       "date": "2026-07-28",
-      "generatedAt": "2026-07-28T00:53:38.110Z",
+      "generatedAt": "2026-07-28T03:46:28.720Z",
       "signal": {
         "label": "明顯偏空",
-        "score": -6,
+        "score": -7,
         "bias": "strongly_bearish"
       },
       "dataQuality": {
         "status": "degraded",
-        "successCount": 14,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 1,
-        "fallbackCount": 1,
+        "staleCount": 0,
+        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     },
