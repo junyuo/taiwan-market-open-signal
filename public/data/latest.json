@@ -1,11 +1,11 @@
 {
   "date": "2026-08-02",
-  "generatedAt": "2026-08-02T01:03:32.631Z",
+  "generatedAt": "2026-08-02T04:03:31.480Z",
   "market": "TW",
   "signal": {
     "label": "偏多",
     "bias": "bullish",
-    "score": 5,
+    "score": 4,
     "summary": "Nasdaq上漲 1.00%；整體訊號偏多，仍需留意盤前突發消息與期貨變化。",
     "drivers": [
       {
@@ -19,12 +19,6 @@
         "name": "NVIDIA",
         "score": 1,
         "reason": "NVIDIA +2.93%，突破 ±1.5% 門檻"
-      },
-      {
-        "id": "usdtwd",
-        "name": "USD/TWD",
-        "score": 1,
-        "reason": "USD/TWD -0.31%，變動超過 0.3%"
       },
       {
         "id": "vix",
@@ -43,6 +37,12 @@
         "name": "TSM ADR",
         "score": 0,
         "reason": "TSM ADR +0.23%，未達 ±1% 門檻"
+      },
+      {
+        "id": "usdtwd",
+        "name": "USD/TWD",
+        "score": 0,
+        "reason": "資料已超過 24 小時，本次不計分"
       },
       {
         "id": "tnx",
@@ -69,7 +69,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "nasdaq",
@@ -87,7 +87,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "Nasdaq +1.00%，依區間規則計 +2 分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "dow",
@@ -105,7 +105,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "sox",
@@ -123,7 +123,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "SOX +0.07%，依半導體權重計 +0 分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "tsm",
@@ -141,7 +141,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "TSM ADR +0.23%，未達 ±1% 門檻",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "nvda",
@@ -159,7 +159,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "NVIDIA +2.93%，突破 ±1.5% 門檻",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "amd",
@@ -177,7 +177,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "asml",
@@ -195,7 +195,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.559064166666666
+      "ageHours": 38.55874444444444
     },
     {
       "id": "vix",
@@ -213,7 +213,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "VIX -6.44%，波動率變動超過 5%",
-      "ageHours": 42.059064166666666
+      "ageHours": 45.05874444444444
     },
     {
       "id": "tnx",
@@ -231,7 +231,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "美債殖利率 +1.76%，未達 ±2% 門檻",
-      "ageHours": 36.72573083333333,
+      "ageHours": 39.725411111111114,
       "verification": {
         "source": "FRED",
         "seriesId": "DGS10",
@@ -253,12 +253,19 @@
       "change": -0.10000228881835938,
       "changePercent": -0.30869667357696606,
       "timestamp": "2026-08-01T02:37:33.000Z",
-      "score": 1,
-      "status": "ok",
+      "score": 0,
+      "status": "stale",
       "source": "Yahoo Finance",
       "isScored": true,
-      "scoreReason": "USD/TWD -0.31%，變動超過 0.3%",
-      "ageHours": 22.433230833333333
+      "scoreReason": "資料已超過 24 小時，本次不計分",
+      "ageHours": 25.43291111111111,
+      "lastGood": {
+        "price": 32.29499816894531,
+        "change": -0.10000228881835938,
+        "changePercent": -0.30869667357696606,
+        "timestamp": "2026-08-01T02:37:33.000Z",
+        "generatedAt": "2026-08-02T01:03:32.631Z"
+      }
     },
     {
       "id": "wti",
@@ -276,7 +283,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 45.059064166666666,
+      "ageHours": 48.05874444444444,
       "lastGood": {
         "price": 86.80000305175781,
         "change": 3.2100067138671875,
@@ -292,16 +299,16 @@
       "category": "COMMODITY",
       "core": false,
       "maxAgeHours": 24,
-      "price": 4049.10009765625,
-      "change": -51,
-      "changePercent": -1.2438720710539055,
+      "price": 4107,
+      "change": 6.89990234375,
+      "changePercent": 0.16828619251745117,
       "timestamp": "2026-07-31T04:00:00.000Z",
       "score": 0,
       "status": "stale",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 45.059064166666666,
+      "ageHours": 48.05874444444444,
       "lastGood": {
         "price": 4098.60009765625,
         "change": -1.5,
@@ -326,7 +333,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 48 小時，本次不計分",
-      "ageHours": 49.059064166666666,
+      "ageHours": 52.05874444444444,
       "lastGood": {
         "price": 64362.01953125,
         "change": 2494.58984375,
@@ -347,20 +354,27 @@
       "changePercent": 0.09880098161996599,
       "timestamp": "2026-07-31T01:30:00.000Z",
       "score": 0,
-      "status": "ok",
+      "status": "stale",
       "source": "Yahoo Finance",
       "isScored": false,
-      "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 47.559064166666666
+      "scoreReason": "資料已超過 48 小時，本次不計分",
+      "ageHours": 50.55874444444444,
+      "lastGood": {
+        "price": 25884.4296875,
+        "change": 25.548828125,
+        "changePercent": 0.09880098161996599,
+        "timestamp": "2026-07-31T01:30:00.000Z",
+        "generatedAt": "2026-08-02T01:03:32.631Z"
+      }
     }
   ],
   "dataQuality": {
     "status": "degraded",
-    "successCount": 12,
+    "successCount": 10,
     "failedCount": 0,
-    "staleCount": 3,
-    "fallbackCount": 3,
-    "coreSuccessRate": 1
+    "staleCount": 5,
+    "fallbackCount": 5,
+    "coreSuccessRate": 0.8571428571428571
   },
   "sources": [
     {
@@ -369,7 +383,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-08-02T01:03:32.631Z",
+      "lastCheckedAt": "2026-08-02T04:03:31.480Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -378,7 +392,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-08-02T01:03:32.631Z",
+      "lastCheckedAt": "2026-08-02T04:03:31.480Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]

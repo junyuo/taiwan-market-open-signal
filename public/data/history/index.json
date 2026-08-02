@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-08-02T01:03:32.631Z",
+  "generatedAt": "2026-08-02T04:03:31.480Z",
   "entries": [
     {
       "date": "2026-08-02",
-      "generatedAt": "2026-08-02T01:03:32.631Z",
+      "generatedAt": "2026-08-02T04:03:31.480Z",
       "signal": {
         "label": "偏多",
-        "score": 5,
+        "score": 4,
         "bias": "bullish"
       },
       "dataQuality": {
         "status": "degraded",
-        "successCount": 12,
+        "successCount": 10,
         "failedCount": 0,
-        "staleCount": 3,
-        "fallbackCount": 3,
-        "coreSuccessRate": 1
+        "staleCount": 5,
+        "fallbackCount": 5,
+        "coreSuccessRate": 0.8571428571428571
       }
     },
     {
