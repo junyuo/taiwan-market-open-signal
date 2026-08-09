@@ -1,22 +1,16 @@
 {
-  "lastUpdated": "2026-08-09T02:53:01.348Z",
+  "lastUpdated": "2026-08-09T23:56:07.788Z",
   "lastSuccessfulUpdate": "2026-08-08T23:51:49.642Z",
   "status": "degraded",
-  "successCount": 10,
+  "successCount": 13,
   "failedCount": 0,
-  "staleCount": 5,
-  "fallbackCount": 5,
-  "coreSuccessRate": 0.8571428571428571,
+  "staleCount": 2,
+  "fallbackCount": 2,
+  "coreSuccessRate": 1,
   "errors": [],
   "warnings": [
-    "USD/TWD: stale (29.5 小時)",
-    "WTI 原油: stale (46.9 小時)",
-    "黃金: stale (46.9 小時)",
-    "日經 225: stale (50.9 小時)",
-    "香港恆生: stale (49.4 小時)",
-    "USD/TWD: 已保留 last-good 參考值",
-    "WTI 原油: 已保留 last-good 參考值",
-    "黃金: 已保留 last-good 參考值",
+    "日經 225: stale (71.9 小時)",
+    "香港恆生: stale (70.4 小時)",
     "日經 225: 已保留 last-good 參考值",
     "香港恆生: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
@@ -28,7 +22,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-08-09T02:53:01.348Z",
+      "lastCheckedAt": "2026-08-09T23:56:07.788Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -37,7 +31,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-08-09T02:53:01.348Z",
+      "lastCheckedAt": "2026-08-09T23:56:07.788Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
