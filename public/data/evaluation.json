@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-07T07:52:03.475Z",
+  "generatedAt": "2026-08-10T08:13:17.873Z",
   "minimumSampleSize": 20,
   "eligibleCount": 6,
-  "excludedCount": 21,
+  "excludedCount": 22,
   "isPublished": false,
   "period": {
     "from": "2026-06-25",
-    "to": "2026-08-07"
+    "to": "2026-08-10"
   },
   "overall": {
     "hits": 6,
@@ -26,8 +26,8 @@
   "bySignalLabel": [
     {
       "label": "明顯偏多",
-      "count": 6,
-      "averageOpeningGapPercent": 1.072379617968542
+      "count": 7,
+      "averageOpeningGapPercent": 1.020868235128834
     },
     {
       "label": "偏多",
