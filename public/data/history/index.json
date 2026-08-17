@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-16T23:40:49.366Z",
+  "generatedAt": "2026-08-17T02:02:43.780Z",
   "entries": [
     {
       "date": "2026-08-17",
-      "generatedAt": "2026-08-16T23:40:49.366Z",
+      "generatedAt": "2026-08-17T02:02:43.780Z",
       "signal": {
         "label": "震盪",
         "score": 1,
@@ -11,10 +11,10 @@
       },
       "dataQuality": {
         "status": "degraded",
-        "successCount": 13,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 2,
-        "fallbackCount": 2,
+        "staleCount": 0,
+        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     },
