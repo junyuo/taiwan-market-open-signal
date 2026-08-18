@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-17T23:44:15.165Z",
+  "generatedAt": "2026-08-18T01:57:31.092Z",
   "entries": [
     {
       "date": "2026-08-18",
-      "generatedAt": "2026-08-17T23:44:15.165Z",
+      "generatedAt": "2026-08-18T01:57:31.092Z",
       "signal": {
         "label": "偏多",
         "score": 3,
@@ -11,10 +11,10 @@
       },
       "dataQuality": {
         "status": "degraded",
-        "successCount": 13,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 2,
-        "fallbackCount": 2,
+        "staleCount": 0,
+        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     },
