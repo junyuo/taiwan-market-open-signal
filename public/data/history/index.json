@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-08-19T02:08:41.221Z",
+  "generatedAt": "2026-08-19T23:44:08.528Z",
   "entries": [
+    {
+      "date": "2026-08-20",
+      "generatedAt": "2026-08-19T23:44:08.528Z",
+      "signal": {
+        "label": "偏空",
+        "score": -2,
+        "bias": "bearish"
+      },
+      "dataQuality": {
+        "status": "ok",
+        "successCount": 15,
+        "failedCount": 0,
+        "staleCount": 0,
+        "fallbackCount": 0,
+        "coreSuccessRate": 1
+      }
+    },
     {
       "date": "2026-08-19",
       "generatedAt": "2026-08-19T02:08:41.221Z",
@@ -487,23 +504,6 @@
       },
       "dataQuality": {
         "status": "ok",
-        "successCount": 13,
-        "failedCount": 0,
-        "staleCount": 2,
-        "fallbackCount": 2,
-        "coreSuccessRate": 1
-      }
-    },
-    {
-      "date": "2026-07-21",
-      "generatedAt": "2026-07-21T04:00:42.747Z",
-      "signal": {
-        "label": "震盪",
-        "score": 1,
-        "bias": "neutral"
-      },
-      "dataQuality": {
-        "status": "degraded",
         "successCount": 13,
         "failedCount": 0,
         "staleCount": 2,
