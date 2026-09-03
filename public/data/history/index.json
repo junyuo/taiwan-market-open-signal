@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-09-03T01:15:47.047Z",
+  "generatedAt": "2026-09-03T04:51:34.419Z",
   "entries": [
     {
       "date": "2026-09-03",
-      "generatedAt": "2026-09-03T01:15:47.047Z",
+      "generatedAt": "2026-09-03T04:51:34.419Z",
       "signal": {
-        "label": "震盪",
-        "score": 1,
-        "bias": "neutral"
+        "label": "偏多",
+        "score": 3,
+        "bias": "bullish"
       },
       "dataQuality": {
         "status": "ok",
