@@ -1,18 +1,18 @@
 {
   "date": "2026-09-04",
-  "generatedAt": "2026-09-04T01:07:05.558Z",
+  "generatedAt": "2026-09-04T04:56:31.932Z",
   "market": "TW",
   "signal": {
     "label": "偏多",
     "bias": "bullish",
-    "score": 4,
-    "summary": "Nasdaq上漲 1.40%；整體訊號偏多，仍需留意盤前突發消息與期貨變化。",
+    "score": 3,
+    "summary": "Nasdaq上漲 0.45%；整體訊號偏多，仍需留意盤前突發消息與期貨變化。",
     "drivers": [
       {
         "id": "nasdaq",
         "name": "Nasdaq",
-        "score": 2,
-        "reason": "Nasdaq +1.40%，依區間規則計 +2 分"
+        "score": 1,
+        "reason": "Nasdaq +0.45%，依區間規則計 +1 分"
       },
       {
         "id": "nvda",
@@ -30,7 +30,7 @@
         "id": "sox",
         "name": "SOX 費半",
         "score": 0,
-        "reason": "SOX +0.11%，依半導體權重計 +0 分"
+        "reason": "SOX +0.45%，依半導體權重計 +0 分"
       },
       {
         "id": "tsm",
@@ -42,7 +42,7 @@
         "id": "usdtwd",
         "name": "USD/TWD",
         "score": 0,
-        "reason": "USD/TWD -0.11%，未達 ±0.3% 門檻"
+        "reason": "USD/TWD -0.07%，未達 ±0.3% 門檻"
       },
       {
         "id": "tnx",
@@ -60,16 +60,16 @@
       "category": "US_INDEX",
       "core": false,
       "maxAgeHours": 96,
-      "price": 7747.7099609375,
-      "change": 81.10986328125,
-      "changePercent": 1.0579639246612853,
-      "timestamp": "2026-09-03T13:30:00.000Z",
+      "price": 7666.60009765625,
+      "change": 35.1298828125,
+      "changePercent": 0.4603291610071398,
+      "timestamp": "2026-09-02T13:30:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 11.618210555555555
+      "ageHours": 39.44220333333333
     },
     {
       "id": "nasdaq",
@@ -78,16 +78,16 @@
       "category": "US_INDEX",
       "core": true,
       "maxAgeHours": 96,
-      "price": 26584.060546875,
-      "change": 366.23046875,
-      "changePercent": 1.3968755906140629,
-      "timestamp": "2026-09-03T13:30:00.000Z",
-      "score": 2,
+      "price": 26217.830078125,
+      "change": 118.060546875,
+      "changePercent": 0.4523432543480613,
+      "timestamp": "2026-09-02T13:30:00.000Z",
+      "score": 1,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": true,
-      "scoreReason": "Nasdaq +1.40%，依區間規則計 +2 分",
-      "ageHours": 11.618210555555555
+      "scoreReason": "Nasdaq +0.45%，依區間規則計 +1 分",
+      "ageHours": 39.44220333333333
     },
     {
       "id": "dow",
@@ -96,16 +96,16 @@
       "category": "US_INDEX",
       "core": false,
       "maxAgeHours": 96,
-      "price": 53686.109375,
-      "change": 624.16015625,
-      "changePercent": 1.1762857668060307,
-      "timestamp": "2026-09-03T13:30:00.000Z",
+      "price": 53061.94921875,
+      "change": 295.0703125,
+      "changePercent": 0.5591960688526724,
+      "timestamp": "2026-09-02T13:30:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 11.618210555555555
+      "ageHours": 39.44220333333333
     },
     {
       "id": "sox",
@@ -114,16 +114,16 @@
       "category": "SEMICONDUCTOR",
       "core": true,
       "maxAgeHours": 96,
-      "price": 11352.12890625,
-      "change": 12.87890625,
-      "changePercent": 0.11357811363185395,
-      "timestamp": "2026-09-03T13:30:00.000Z",
+      "price": 11339.25,
+      "change": 50.6396484375,
+      "changePercent": 0.4485906312683631,
+      "timestamp": "2026-09-02T13:30:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": true,
-      "scoreReason": "SOX +0.11%，依半導體權重計 +0 分",
-      "ageHours": 11.618210555555555
+      "scoreReason": "SOX +0.45%，依半導體權重計 +0 分",
+      "ageHours": 39.44220333333333
     },
     {
       "id": "tsm",
@@ -141,7 +141,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "TSM ADR +0.36%，未達 ±1% 門檻",
-      "ageHours": 35.61821055555556
+      "ageHours": 39.44220333333333
     },
     {
       "id": "nvda",
@@ -159,7 +159,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "NVIDIA +3.21%，突破 ±1.5% 門檻",
-      "ageHours": 35.61821055555556
+      "ageHours": 39.44220333333333
     },
     {
       "id": "amd",
@@ -177,7 +177,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.61821055555556
+      "ageHours": 39.44220333333333
     },
     {
       "id": "asml",
@@ -195,7 +195,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 35.61821055555556
+      "ageHours": 39.44220333333333
     },
     {
       "id": "vix",
@@ -213,7 +213,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "VIX -5.79%，波動率變動超過 5%",
-      "ageHours": 18.118210555555557
+      "ageHours": 21.94220333333333
     },
     {
       "id": "tnx",
@@ -231,7 +231,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "美債殖利率 -0.71%，未達 ±2% 門檻",
-      "ageHours": 12.784877222222223,
+      "ageHours": 16.60887,
       "verification": {
         "source": "FRED",
         "seriesId": "DGS10",
@@ -249,16 +249,16 @@
       "category": "RATE_FX",
       "core": true,
       "maxAgeHours": 24,
-      "price": 31.690000534057617,
-      "change": -0.03619956970214844,
-      "changePercent": -0.11409992241036944,
-      "timestamp": "2026-09-04T01:06:53.000Z",
+      "price": 31.704999923706055,
+      "change": -0.021200180053710938,
+      "changePercent": -0.06682231084837222,
+      "timestamp": "2026-09-04T04:56:30.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": true,
-      "scoreReason": "USD/TWD -0.11%，未達 ±0.3% 門檻",
-      "ageHours": 0.0034883333333333333
+      "scoreReason": "USD/TWD -0.07%，未達 ±0.3% 門檻",
+      "ageHours": 0.0005366666666666666
     },
     {
       "id": "wti",
@@ -267,16 +267,16 @@
       "category": "COMMODITY",
       "core": false,
       "maxAgeHours": 24,
-      "price": 91.5199966430664,
-      "change": 0.5099945068359375,
-      "changePercent": 0.5603719315076383,
-      "timestamp": "2026-09-04T00:56:54.000Z",
+      "price": 91.63999938964844,
+      "change": 0.6299972534179688,
+      "changePercent": 0.6922285887598844,
+      "timestamp": "2026-09-04T04:00:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 0.16987722222222224
+      "ageHours": 0.9422033333333333
     },
     {
       "id": "gold",
@@ -285,16 +285,16 @@
       "category": "COMMODITY",
       "core": false,
       "maxAgeHours": 24,
-      "price": 4531.39990234375,
-      "change": 165.10009765625,
-      "changePercent": 3.7812359444260917,
-      "timestamp": "2026-09-04T00:57:00.000Z",
+      "price": 4520.2001953125,
+      "change": 153.900390625,
+      "changePercent": 3.524732554090266,
+      "timestamp": "2026-09-04T04:00:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 0.16821055555555556
+      "ageHours": 0.9422033333333333
     },
     {
       "id": "nikkei",
@@ -303,16 +303,16 @@
       "category": "ASIA_INDEX",
       "core": false,
       "maxAgeHours": 48,
-      "price": 64734.2109375,
-      "change": 408.5703125,
-      "changePercent": 0.6351593369770657,
+      "price": 64975.03125,
+      "change": 649.390625,
+      "changePercent": 1.0095361953497841,
       "timestamp": "2026-09-04T00:00:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 1.1182105555555555
+      "ageHours": 4.9422033333333335
     },
     {
       "id": "hsi",
@@ -321,16 +321,16 @@
       "category": "ASIA_INDEX",
       "core": false,
       "maxAgeHours": 48,
-      "price": 25311.2109375,
-      "change": -18.51953125,
-      "changePercent": -0.07311381095368569,
-      "timestamp": "2026-09-02T01:30:00.000Z",
+      "price": 25737.599609375,
+      "change": 426.388671875,
+      "changePercent": 1.6845842458026412,
+      "timestamp": "2026-09-04T01:30:00.000Z",
       "score": 0,
       "status": "ok",
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 47.61821055555556
+      "ageHours": 3.4422033333333335
     }
   ],
   "dataQuality": {
@@ -348,7 +348,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-04T01:07:05.558Z",
+      "lastCheckedAt": "2026-09-04T04:56:31.932Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -357,7 +357,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-04T01:07:05.558Z",
+      "lastCheckedAt": "2026-09-04T04:56:31.932Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
