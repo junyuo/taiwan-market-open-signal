@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-09-09T01:20:06.706Z",
+  "generatedAt": "2026-09-09T04:59:30.295Z",
   "entries": [
     {
       "date": "2026-09-09",
-      "generatedAt": "2026-09-09T01:20:06.706Z",
+      "generatedAt": "2026-09-09T04:59:30.295Z",
       "signal": {
         "label": "震盪",
-        "score": 0,
+        "score": 1,
         "bias": "neutral"
       },
       "dataQuality": {
         "status": "degraded",
-        "successCount": 11,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 4,
-        "fallbackCount": 4,
-        "coreSuccessRate": 0.7142857142857143
+        "staleCount": 0,
+        "fallbackCount": 0,
+        "coreSuccessRate": 1
       }
     },
     {
