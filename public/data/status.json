@@ -1,16 +1,14 @@
 {
-  "lastUpdated": "2026-09-09T05:23:14.791Z",
-  "lastSuccessfulUpdate": "2026-09-05T04:58:35.193Z",
-  "status": "degraded",
+  "lastUpdated": "2026-09-10T01:14:32.505Z",
+  "lastSuccessfulUpdate": "2026-09-10T01:14:32.505Z",
+  "status": "ok",
   "successCount": 15,
   "failedCount": 0,
   "staleCount": 0,
   "fallbackCount": 0,
   "coreSuccessRate": 1,
   "errors": [],
-  "warnings": [
-    "FRED: FRED 觀測值超過 3 日"
-  ],
+  "warnings": [],
   "sources": [
     {
       "id": "yahoo",
@@ -18,17 +16,17 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-09T05:23:14.791Z",
+      "lastCheckedAt": "2026-09-10T01:14:32.505Z",
       "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "degraded",
+      "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-09T05:23:14.791Z",
-      "message": "FRED 觀測值超過 3 日"
+      "lastCheckedAt": "2026-09-10T01:14:32.505Z",
+      "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
 }
