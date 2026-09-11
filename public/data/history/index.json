@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-11T01:16:33.958Z",
+  "generatedAt": "2026-09-11T04:59:28.601Z",
   "entries": [
     {
       "date": "2026-09-11",
-      "generatedAt": "2026-09-11T01:16:33.958Z",
+      "generatedAt": "2026-09-11T04:59:28.601Z",
       "signal": {
         "label": "明顯偏空",
-        "score": -8,
+        "score": -11,
         "bias": "strongly_bearish"
       },
       "dataQuality": {
