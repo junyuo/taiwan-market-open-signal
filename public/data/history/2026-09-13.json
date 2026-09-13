@@ -1,6 +1,6 @@
 {
   "date": "2026-09-13",
-  "generatedAt": "2026-09-13T05:10:30.982Z",
+  "generatedAt": "2026-09-13T05:25:02.669Z",
   "market": "TW",
   "signal": {
     "label": "明顯偏多",
@@ -69,7 +69,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "nasdaq",
@@ -87,7 +87,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "Nasdaq +0.96%，依區間規則計 +1 分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "dow",
@@ -105,7 +105,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "sox",
@@ -123,7 +123,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "SOX +1.81%，依半導體權重計 +3 分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "tsm",
@@ -141,7 +141,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "TSM ADR +1.22%，突破 ±1% 門檻",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "nvda",
@@ -159,7 +159,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "NVIDIA -0.03%，未達 ±1.5% 門檻",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "amd",
@@ -177,7 +177,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "asml",
@@ -195,7 +195,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "背景觀察指標，不納入總分",
-      "ageHours": 39.67527277777778
+      "ageHours": 39.917408055555555
     },
     {
       "id": "vix",
@@ -213,7 +213,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "VIX -11.21%，波動率變動超過 5%",
-      "ageHours": 46.17527277777778
+      "ageHours": 46.417408055555555
     },
     {
       "id": "tnx",
@@ -231,7 +231,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "美債殖利率 +0.63%，未達 ±2% 門檻",
-      "ageHours": 40.84193944444444,
+      "ageHours": 41.08407472222222,
       "verification": {
         "source": "FRED",
         "seriesId": "DGS10",
@@ -258,7 +258,7 @@
       "source": "Yahoo Finance",
       "isScored": true,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 25.585272777777778,
+      "ageHours": 25.827408055555555,
       "lastGood": {
         "price": 31.62700080871582,
         "change": -0.007999420166015625,
@@ -283,7 +283,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 49.17527277777778,
+      "ageHours": 49.417408055555555,
       "lastGood": {
         "price": 99.98999786376953,
         "change": -2.4900054931640625,
@@ -308,7 +308,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 24 小時，本次不計分",
-      "ageHours": 49.17527277777778,
+      "ageHours": 49.417408055555555,
       "lastGood": {
         "price": 4390,
         "change": 25.5,
@@ -333,7 +333,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 48 小時，本次不計分",
-      "ageHours": 53.17527277777778,
+      "ageHours": 53.417408055555555,
       "lastGood": {
         "price": 64011.33984375,
         "change": -1259.609375,
@@ -358,7 +358,7 @@
       "source": "Yahoo Finance",
       "isScored": false,
       "scoreReason": "資料已超過 48 小時，本次不計分",
-      "ageHours": 51.67527277777778,
+      "ageHours": 51.917408055555555,
       "lastGood": {
         "price": 24805.630859375,
         "change": -148.83984375,
@@ -383,7 +383,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-13T05:10:30.982Z",
+      "lastCheckedAt": "2026-09-13T05:25:02.669Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -392,7 +392,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-13T05:10:30.982Z",
+      "lastCheckedAt": "2026-09-13T05:25:02.669Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
