@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-16T01:30:00.090Z",
+  "generatedAt": "2026-09-16T05:04:18.098Z",
   "entries": [
     {
       "date": "2026-09-16",
-      "generatedAt": "2026-09-16T01:30:00.090Z",
+      "generatedAt": "2026-09-16T05:04:18.098Z",
       "signal": {
         "label": "偏空",
-        "score": -5,
+        "score": -3,
         "bias": "bearish"
       },
       "dataQuality": {
         "status": "ok",
-        "successCount": 14,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 1,
-        "fallbackCount": 1,
+        "staleCount": 0,
+        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     },
