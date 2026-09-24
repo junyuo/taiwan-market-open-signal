@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-09-24T01:32:39.299Z",
+  "generatedAt": "2026-09-24T05:10:11.994Z",
   "entries": [
     {
       "date": "2026-09-24",
-      "generatedAt": "2026-09-24T01:32:39.299Z",
+      "generatedAt": "2026-09-24T05:10:11.994Z",
       "signal": {
-        "label": "震盪",
-        "score": 0,
-        "bias": "neutral"
+        "label": "偏空",
+        "score": -4,
+        "bias": "bearish"
       },
       "dataQuality": {
         "status": "ok",
-        "successCount": 14,
+        "successCount": 15,
         "failedCount": 0,
-        "staleCount": 1,
-        "fallbackCount": 1,
+        "staleCount": 0,
+        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     },
