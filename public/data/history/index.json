@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-09-26T05:35:27.159Z",
+  "generatedAt": "2026-09-27T01:36:51.803Z",
   "entries": [
+    {
+      "date": "2026-09-27",
+      "generatedAt": "2026-09-27T01:36:51.803Z",
+      "signal": {
+        "label": "偏多",
+        "score": 3,
+        "bias": "bullish"
+      },
+      "dataQuality": {
+        "status": "degraded",
+        "successCount": 10,
+        "failedCount": 0,
+        "staleCount": 5,
+        "fallbackCount": 5,
+        "coreSuccessRate": 0.8571428571428571
+      }
+    },
     {
       "date": "2026-09-26",
       "generatedAt": "2026-09-26T05:35:27.159Z",
@@ -491,23 +508,6 @@
         "failedCount": 0,
         "staleCount": 4,
         "fallbackCount": 4,
-        "coreSuccessRate": 1
-      }
-    },
-    {
-      "date": "2026-08-28",
-      "generatedAt": "2026-08-28T12:16:28.138Z",
-      "signal": {
-        "label": "明顯偏多",
-        "score": 9,
-        "bias": "strongly_bullish"
-      },
-      "dataQuality": {
-        "status": "ok",
-        "successCount": 15,
-        "failedCount": 0,
-        "staleCount": 0,
-        "fallbackCount": 0,
         "coreSuccessRate": 1
       }
     }
