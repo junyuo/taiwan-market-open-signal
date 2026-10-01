@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-09-30T06:01:55.365Z",
-  "lastSuccessfulUpdate": "2026-09-30T06:01:55.365Z",
+  "lastUpdated": "2026-10-01T02:15:33.768Z",
+  "lastSuccessfulUpdate": "2026-10-01T02:15:33.768Z",
   "status": "ok",
   "successCount": 15,
   "failedCount": 0,
@@ -16,7 +16,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-30T06:01:55.365Z",
+      "lastCheckedAt": "2026-10-01T02:15:33.768Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -25,7 +25,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-09-30T06:01:55.365Z",
+      "lastCheckedAt": "2026-10-01T02:15:33.768Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
