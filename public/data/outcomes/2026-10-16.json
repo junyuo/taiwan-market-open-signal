@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-16",
+  "retrievedAt": "2026-10-16T11:45:28.884Z",
+  "source": "TWSE MI_5MINS_HIST",
+  "signal": {
+    "generatedAt": "2026-10-16T05:09:17.304Z",
+    "label": "偏空",
+    "score": -5,
+    "bias": "bearish",
+    "direction": "bearish",
+    "qualityStatus": "ok"
+  },
+  "market": {
+    "previousClose": 46969.87,
+    "open": 46995.03,
+    "high": 47520.6,
+    "low": 46995.03,
+    "close": 47111.26,
+    "openingGapPercent": 0.05356625428172279,
+    "closeReturnPercent": 0.30102276203871625
+  },
+  "actualDirection": "neutral",
+  "eligibility": "excluded",
+  "exclusionReason": "neutral_actual",
+  "hit": null
+}
