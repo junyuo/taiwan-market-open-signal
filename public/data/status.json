@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-10-21T05:22:30.958Z",
-  "lastSuccessfulUpdate": "2026-10-21T05:22:30.958Z",
+  "lastUpdated": "2026-10-22T01:39:51.520Z",
+  "lastSuccessfulUpdate": "2026-10-22T01:39:51.520Z",
   "status": "ok",
   "successCount": 15,
   "failedCount": 0,
@@ -8,7 +8,9 @@
   "fallbackCount": 0,
   "coreSuccessRate": 1,
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "FRED: Unexpected token '<', \"<!doctype \"... is not valid JSON"
+  ],
   "sources": [
     {
       "id": "yahoo",
@@ -16,17 +18,17 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-10-21T05:22:30.958Z",
+      "lastCheckedAt": "2026-10-22T01:39:51.520Z",
       "message": "15 項指標皆取得回應"
     },
     {
       "id": "fred",
       "name": "FRED DGS10",
-      "status": "ok",
-      "successCount": 1,
-      "failedCount": 0,
-      "lastCheckedAt": "2026-10-21T05:22:30.958Z",
-      "message": "Yahoo 與 FRED 殖利率水準一致"
+      "status": "failed",
+      "successCount": 0,
+      "failedCount": 1,
+      "lastCheckedAt": "2026-10-22T01:39:51.520Z",
+      "message": "Unexpected token '<', \"<!doctype \"... is not valid JSON"
     }
   ]
 }
