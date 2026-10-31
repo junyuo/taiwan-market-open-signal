@@ -1,14 +1,17 @@
 {
-  "lastUpdated": "2026-10-30T06:31:30.587Z",
-  "lastSuccessfulUpdate": "2026-10-30T06:31:30.587Z",
+  "lastUpdated": "2026-10-31T02:34:44.934Z",
+  "lastSuccessfulUpdate": "2026-10-31T02:34:44.934Z",
   "status": "ok",
-  "successCount": 15,
+  "successCount": 14,
   "failedCount": 0,
-  "staleCount": 0,
-  "fallbackCount": 0,
-  "coreSuccessRate": 1,
+  "staleCount": 1,
+  "fallbackCount": 1,
+  "coreSuccessRate": 0.8571428571428571,
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "USD/TWD: stale (26.6 小時)",
+    "USD/TWD: 已保留 last-good 參考值"
+  ],
   "sources": [
     {
       "id": "yahoo",
@@ -16,7 +19,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-10-30T06:31:30.587Z",
+      "lastCheckedAt": "2026-10-31T02:34:44.934Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -25,7 +28,7 @@
       "status": "ok",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-10-30T06:31:30.587Z",
+      "lastCheckedAt": "2026-10-31T02:34:44.934Z",
       "message": "Yahoo 與 FRED 殖利率水準一致"
     }
   ]
