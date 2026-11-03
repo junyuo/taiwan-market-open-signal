@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-03T03:58:09.190Z",
+  "lastUpdated": "2026-11-03T07:05:40.749Z",
   "lastSuccessfulUpdate": "2026-10-31T06:21:27.867Z",
   "status": "degraded",
   "successCount": 15,
@@ -18,7 +18,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-03T03:58:09.190Z",
+      "lastCheckedAt": "2026-11-03T07:05:40.749Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -27,7 +27,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-03T03:58:09.190Z",
+      "lastCheckedAt": "2026-11-03T07:05:40.749Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
