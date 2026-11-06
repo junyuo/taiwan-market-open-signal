@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-11-05T14:51:16.512Z",
+  "generatedAt": "2026-11-06T14:29:29.316Z",
   "minimumSampleSize": 20,
-  "eligibleCount": 17,
+  "eligibleCount": 18,
   "excludedCount": 62,
   "isPublished": false,
   "period": {
     "from": "2026-06-25",
-    "to": "2026-11-05"
+    "to": "2026-11-06"
   },
   "overall": {
-    "hits": 17,
-    "total": 17,
+    "hits": 18,
+    "total": 18,
     "hitRate": 1
   },
   "bullish": {
@@ -19,8 +19,8 @@
     "hitRate": 1
   },
   "bearish": {
-    "hits": 8,
-    "total": 8,
+    "hits": 9,
+    "total": 9,
     "hitRate": 1
   },
   "bySignalLabel": [
@@ -46,8 +46,8 @@
     },
     {
       "label": "明顯偏空",
-      "count": 20,
-      "averageOpeningGapPercent": -0.2900622367493305
+      "count": 21,
+      "averageOpeningGapPercent": -0.5808029557940871
     }
   ]
 }
