@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-10T04:42:09.179Z",
+  "generatedAt": "2026-11-10T07:36:45.302Z",
   "entries": [
     {
       "date": "2026-11-10",
-      "generatedAt": "2026-11-10T04:42:09.179Z",
+      "generatedAt": "2026-11-10T07:36:45.302Z",
       "signal": {
         "label": "明顯偏多",
-        "score": 6,
+        "score": 7,
         "bias": "strongly_bullish"
       },
       "dataQuality": {
