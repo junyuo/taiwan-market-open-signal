@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-11T02:53:04.760Z",
+  "generatedAt": "2026-11-11T06:55:14.192Z",
   "entries": [
     {
       "date": "2026-11-11",
-      "generatedAt": "2026-11-11T02:53:04.760Z",
+      "generatedAt": "2026-11-11T06:55:14.192Z",
       "signal": {
-        "label": "偏空",
-        "score": -2,
-        "bias": "bearish"
+        "label": "震盪",
+        "score": -1,
+        "bias": "neutral"
       },
       "dataQuality": {
         "status": "ok",
