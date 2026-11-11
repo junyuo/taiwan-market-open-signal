@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-11-10T07:48:07.809Z",
+  "generatedAt": "2026-11-11T02:53:04.760Z",
   "entries": [
+    {
+      "date": "2026-11-11",
+      "generatedAt": "2026-11-11T02:53:04.760Z",
+      "signal": {
+        "label": "偏空",
+        "score": -2,
+        "bias": "bearish"
+      },
+      "dataQuality": {
+        "status": "ok",
+        "successCount": 15,
+        "failedCount": 0,
+        "staleCount": 0,
+        "fallbackCount": 0,
+        "coreSuccessRate": 1
+      }
+    },
     {
       "date": "2026-11-10",
       "generatedAt": "2026-11-10T07:48:07.809Z",
@@ -491,23 +508,6 @@
         "failedCount": 0,
         "staleCount": 0,
         "fallbackCount": 0,
-        "coreSuccessRate": 1
-      }
-    },
-    {
-      "date": "2026-10-12",
-      "generatedAt": "2026-10-12T06:37:37.631Z",
-      "signal": {
-        "label": "震盪",
-        "score": -1,
-        "bias": "neutral"
-      },
-      "dataQuality": {
-        "status": "degraded",
-        "successCount": 14,
-        "failedCount": 0,
-        "staleCount": 1,
-        "fallbackCount": 1,
         "coreSuccessRate": 1
       }
     }
