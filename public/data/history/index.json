@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-11-16T07:21:22.109Z",
+  "generatedAt": "2026-11-17T05:08:54.108Z",
   "entries": [
+    {
+      "date": "2026-11-17",
+      "generatedAt": "2026-11-17T05:08:54.108Z",
+      "signal": {
+        "label": "明顯偏空",
+        "score": -11,
+        "bias": "strongly_bearish"
+      },
+      "dataQuality": {
+        "status": "degraded",
+        "successCount": 13,
+        "failedCount": 0,
+        "staleCount": 2,
+        "fallbackCount": 2,
+        "coreSuccessRate": 1
+      }
+    },
     {
       "date": "2026-11-16",
       "generatedAt": "2026-11-16T07:21:22.109Z",
@@ -492,23 +509,6 @@
         "staleCount": 1,
         "fallbackCount": 1,
         "coreSuccessRate": 1
-      }
-    },
-    {
-      "date": "2026-10-18",
-      "generatedAt": "2026-10-18T05:11:53.880Z",
-      "signal": {
-        "label": "明顯偏空",
-        "score": -9,
-        "bias": "strongly_bearish"
-      },
-      "dataQuality": {
-        "status": "degraded",
-        "successCount": 10,
-        "failedCount": 0,
-        "staleCount": 5,
-        "fallbackCount": 5,
-        "coreSuccessRate": 0.8571428571428571
       }
     }
   ]
