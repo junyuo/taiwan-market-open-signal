@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-18T15:53:43.102Z",
+  "generatedAt": "2026-11-19T15:57:39.590Z",
   "minimumSampleSize": 20,
   "eligibleCount": 19,
-  "excludedCount": 66,
+  "excludedCount": 67,
   "isPublished": false,
   "period": {
     "from": "2026-06-25",
-    "to": "2026-11-18"
+    "to": "2026-11-19"
   },
   "overall": {
     "hits": 18,
@@ -36,8 +36,8 @@
     },
     {
       "label": "震盪",
-      "count": 18,
-      "averageOpeningGapPercent": 0.1207646826972047
+      "count": 19,
+      "averageOpeningGapPercent": 0.10796897305427147
     },
     {
       "label": "偏空",
