@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-23T03:51:54.064Z",
+  "lastUpdated": "2026-11-23T07:59:13.191Z",
   "lastSuccessfulUpdate": "2026-11-21T07:45:24.130Z",
   "status": "degraded",
   "successCount": 14,
@@ -9,7 +9,7 @@
   "coreSuccessRate": 1,
   "errors": [],
   "warnings": [
-    "日經 225: stale (75.9 小時)",
+    "日經 225: stale (80.0 小時)",
     "日經 225: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
   ],
@@ -20,7 +20,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-23T03:51:54.064Z",
+      "lastCheckedAt": "2026-11-23T07:59:13.191Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -29,7 +29,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-23T03:51:54.064Z",
+      "lastCheckedAt": "2026-11-23T07:59:13.191Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
