@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-28T08:15:39.618Z",
+  "lastUpdated": "2026-11-28T08:30:05.103Z",
   "lastSuccessfulUpdate": "2026-11-26T08:56:35.435Z",
   "status": "degraded",
   "successCount": 14,
@@ -9,7 +9,7 @@
   "coreSuccessRate": 0.8571428571428571,
   "errors": [],
   "warnings": [
-    "USD/TWD: stale (32.3 小時)",
+    "USD/TWD: stale (32.5 小時)",
     "USD/TWD: 已保留 last-good 參考值",
     "FRED: FRED 觀測值超過 3 日"
   ],
@@ -20,7 +20,7 @@
       "status": "ok",
       "successCount": 15,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-28T08:15:39.618Z",
+      "lastCheckedAt": "2026-11-28T08:30:05.103Z",
       "message": "15 項指標皆取得回應"
     },
     {
@@ -29,7 +29,7 @@
       "status": "degraded",
       "successCount": 1,
       "failedCount": 0,
-      "lastCheckedAt": "2026-11-28T08:15:39.618Z",
+      "lastCheckedAt": "2026-11-28T08:30:05.103Z",
       "message": "FRED 觀測值超過 3 日"
     }
   ]
